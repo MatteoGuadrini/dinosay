@@ -29,7 +29,7 @@ From the command line, _dinosay_ looks like this:
 ```console
 $ dinosay --help
 usage: dinosay [-h] (--dinosaur NAME | --file DINOFILE | --list)
-                 [--color COLORNAME] [--behavior BEHAVIOR] [--idea] [--tongue] [--eye EYE]
+                 [--color] [--behavior BEHAVIOR] [--idea] [--tongue] [--eye EYE]
                  [--wrap INT] [--random] MESSAGE
 
 ```

@@ -53,7 +53,7 @@ def parse_arguments():
     parser_object.add_argument('-c', '--color', help='color dinosaur', dest='color', action='store_true')
     parser_object.add_argument('-b', '--behavior', help='behavior of dinosaur', dest='behavior')
     parser_object.add_argument('-i', '--idea', help="idea's speech bubble", dest='idea', action='store_true')
-    parser_object.add_argument('-t', '--tongue', help='shape of the tongue', dest='tongue')
+    parser_object.add_argument('-t', '--tongue', help='shape of the tongue', dest='tongue', action='store_true')
     parser_object.add_argument('-e', '--eye', help='shape of the eye', dest='eye')
     parser_object.add_argument('-w', '--wrap', help='length of the message', dest='wrap', type=int)
     # Return parser object
