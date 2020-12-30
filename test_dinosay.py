@@ -20,5 +20,11 @@ class TestCommandLine(unittest.TestCase):
         self.assertEqual(args.wrap, 40)
 
 
+class TestCore(unittest.TestCase):
+    def test_wrap_text(self):
+        wrapped = ds.wrap_text("Hi I'm a carnivorous dinosaur who eats mostly curious men who do random tests! Oops!")
+        self.assertEqual(len(wrapped), 84)
+
+
 if __name__ == '__main__':
     unittest.main()
