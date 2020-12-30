@@ -27,6 +27,7 @@ Module to print paleolithic comics
 # region imports
 import dinosay
 from argparse import ArgumentParser
+from textwrap import wrap
 
 
 # endregion
@@ -36,6 +37,17 @@ from argparse import ArgumentParser
 # endregion
 
 # region functions
+def wrap_text(text, width=40):
+    """
+    Function that splits a string of N characters
+
+    :param text: string text
+    :param width: width of string. Default is 40 characters
+    :return: string
+    """
+    return "\n".join(wrap(text, width=width))
+
+
 def parse_arguments():
     """
     Function that captures the parameters and the arguments in the command line
