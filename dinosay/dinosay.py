@@ -52,6 +52,11 @@ EYE_TYPE = {
     'closed': '- -'
 }
 
+TONGUE_TYPE = {
+    'right': "\_\\",
+    'left': "/_/"
+}
+
 
 # endregion
 
