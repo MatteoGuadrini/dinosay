@@ -40,6 +40,18 @@ LOGO = r"""
   \/____/   \/_/   \/_/ \/_/   \/_____/   \/_____/   \/_/\/_/   \/_____/ 
 """
 
+EYE_TYPE = {
+    'classic': 'O O',
+    'borg': '= =',
+    'stoned': '* *',
+    'glass': '0-0',
+    'hypno': '@ @',
+    'rage': '° °',
+    'ko': 'x x',
+    'happy': '^ ^',
+    'closed': '- -'
+}
+
 
 # endregion
 
