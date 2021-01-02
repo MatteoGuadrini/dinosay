@@ -28,9 +28,29 @@ From the command line, _dinosay_ looks like this:
 
 ```console
 $ dinosay --help
-usage: dinosay [-h] (--dinosaur NAME | --file DINOFILE | --list)
-                 [--color] [--behavior BEHAVIOR] [--idea] [--tongue] [--eye EYE]
-                 [--wrap INT] [--random] MESSAGE
+usage: dinosay [-h] [--version] [-d DINOSAUR | -f FILE | -l] [-c]
+               [-b BEHAVIOR] [-i] [-t] [-e EYE] [-w WRAP]
+               message
+               
+print messages via ASCII dinosaurs
+
+positional arguments:
+  message               message to print
+  
+optional arguments:
+  -h, --help            show this help message and exit
+  --version, -v         show program's version number and exit
+  -d DINOSAUR, --dinosaur DINOSAUR
+                        dinosaur to print
+  -f FILE, --file FILE  file containing ASCII to print
+  -l, --list            list of all dinosaurs and parts
+  -c, --color           color dinosaur
+  -b BEHAVIOR, --behavior BEHAVIOR
+                        behavior of dinosaur
+  -i, --idea            idea's speech bubble
+  -t, --tongue          shape of the tongue
+  -e EYE, --eye EYE     shape of the eye
+  -w WRAP, --wrap WRAP  length of the message
 
 ```
 
