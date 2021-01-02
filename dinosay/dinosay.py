@@ -19,3 +19,84 @@
 #
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+"""
+Module to print paleolithic comics
+"""
+
+# region imports
+import dinosay
+from argparse import ArgumentParser
+from textwrap import wrap
+
+# endregion
+
+# region variables
+LOGO = r"""
+ _____     __     __   __     ______     ______     ______     __  __   
+/\  __-.  /\ \   /\ "-.\ \   /\  __ \   /\  ___\   /\  __ \   /\ \_\ \  
+\ \ \/\ \ \ \ \  \ \ \-.  \  \ \ \/\ \  \ \___  \  \ \  __ \  \ \____ \ 
+ \ \____-  \ \_\  \ \_\\"\_\  \ \_____\  \/\_____\  \ \_\ \_\  \/\_____\
+  \/____/   \/_/   \/_/ \/_/   \/_____/   \/_____/   \/_/\/_/   \/_____/ 
+"""
+
+EYE_TYPE = {
+    'classic': 'O O',
+    'borg': '= =',
+    'stoned': '* *',
+    'glass': '0-0',
+    'hypno': '@ @',
+    'rage': '° °',
+    'ko': 'x x',
+    'happy': '^ ^',
+    'closed': '- -'
+}
+
+TONGUE_TYPE = {
+    'right': "\_\\",
+    'left': "/_/"
+}
+
+
+# endregion
+
+# region functions
+def wrap_text(text, width=40):
+    """
+    Function that splits a string of N characters
+
+    :param text: string text
+    :param width: width of string. Default is 40 characters
+    :return: string
+    """
+    return "\n".join(wrap(text, width=width))
+
+
+def parse_arguments():
+    """
+    Function that captures the parameters and the arguments in the command line
+
+    :return: parser object
+    """
+    # Create a principal parser
+    parser_object = ArgumentParser(prog='dinosay', description='print messages via ASCII dinosaurs')
+    parser_object.add_argument('--version', '-v', action='version', version='%(prog)s ' + dinosay.__version__)
+    parser_object.add_argument('message', help='message to print')
+    input_group = parser_object.add_mutually_exclusive_group()
+    input_group.add_argument('-d', '--dinosaur', help='dinosaur to print', dest='dinosaur')
+    input_group.add_argument('-f', '--file', help='file containing ASCII to print', dest='file')
+    input_group.add_argument('-l', '--list', help='list of all dinosaurs and parts', dest='list', action='store_true')
+    parser_object.add_argument('-c', '--color', help='color dinosaur', dest='color', action='store_true')
+    parser_object.add_argument('-b', '--behavior', help='behavior of dinosaur', dest='behavior')
+    parser_object.add_argument('-i', '--idea', help="idea's speech bubble", dest='idea', action='store_true')
+    parser_object.add_argument('-t', '--tongue', help='shape of the tongue', dest='tongue', action='store_true')
+    parser_object.add_argument('-e', '--eye', help='shape of the eye', dest='eye')
+    parser_object.add_argument('-w', '--wrap', help='length of the message', dest='wrap', type=int)
+    # Return parser object
+    return parser_object
+
+# endregion
+
+# region main
+
+# endregion
