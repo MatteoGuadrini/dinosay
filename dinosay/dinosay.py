@@ -53,6 +53,7 @@ EYE_TYPE = {
 }
 
 TONGUE_TYPE = {
+    'classic': 'U',
     'right': "\_\\",
     'left': "/_/"
 }
@@ -61,6 +62,29 @@ TONGUE_TYPE = {
 # endregion
 
 # region functions
+def behavior_selector(behavior):
+    """
+    Function that creates the elements (eyes, tongue) to compose the dinosaur
+
+    :param behavior: behavior selected
+    :return: dictionary
+    """
+    BEHAVIOR = {
+        'normal': {'eye': EYE_TYPE.get('classic')},
+        'happy': {'eye': EYE_TYPE.get('happy')},
+        'joking': {'eye': EYE_TYPE.get('happy'), 'tongue': TONGUE_TYPE.get('classic')},
+        'lazy': {'eye': EYE_TYPE.get('closed')},
+        'tired': {'eye': EYE_TYPE.get('closed'), 'tongue': TONGUE_TYPE.get('classic')},
+        'angry': {'eye': EYE_TYPE.get('rage')},
+        'nerd': {'eye': EYE_TYPE.get('glass')},
+        'cyborg': {'eye': EYE_TYPE.get('borg')},
+        'dead': {'eye': EYE_TYPE.get('ko'), 'tongue': TONGUE_TYPE.get('classic')},
+        'trance': {'eye': EYE_TYPE.get('hypno')},
+        'stoned': {'eye': EYE_TYPE.get('stoned')}
+    }
+    return BEHAVIOR.get(behavior, BEHAVIOR['normal'])
+
+
 def wrap_text(text, width=40):
     """
     Function that splits a string of N characters
