@@ -25,6 +25,14 @@ class TestCore(unittest.TestCase):
         wrapped = ds.wrap_text("Hi I'm a carnivorous dinosaur who eats mostly curious men who do random tests! Oops!")
         self.assertEqual(len(wrapped), 84)
 
+    def test_behavior_selector(self):
+        normal = ds.behavior_selector('normal')
+        self.assertEqual(normal.get('eye'), 'O O')
+        normal = ds.behavior_selector('happy')
+        self.assertEqual(normal.get('eye'), '^ ^')
+        normal = ds.behavior_selector('cyborg')
+        self.assertEqual(normal.get('eye'), '= =')
+
 
 if __name__ == '__main__':
     unittest.main()
