@@ -26,7 +26,7 @@ Module to print paleolithic comics
 
 # region imports
 import dinosay
-from argparse import ArgumentParser
+from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from textwrap import wrap
 
 # endregion
@@ -79,7 +79,8 @@ def parse_arguments():
     :return: parser object
     """
     # Create a principal parser
-    parser_object = ArgumentParser(prog='dinosay', description='print messages via ASCII dinosaurs')
+    parser_object = ArgumentParser(prog='dinosay', description='print messages via ASCII dinosaurs',
+                                   formatter_class=RawDescriptionHelpFormatter, epilog=LOGO)
     parser_object.add_argument('--version', '-v', action='version', version='%(prog)s ' + dinosay.__version__)
     parser_object.add_argument('message', help='message to print')
     input_group = parser_object.add_mutually_exclusive_group()
