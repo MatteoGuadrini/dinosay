@@ -28,6 +28,7 @@ Module to print paleolithic comics
 import dinosay
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from textwrap import wrap
+from string import Template
 
 # endregion
 
@@ -62,6 +63,44 @@ TONGUE_TYPE = {
 # endregion
 
 # region functions
+def make_comic(text,
+               horizontal_char='-',
+               top_sx_char='/',
+               top_dx_char='\\',
+               bottom_sx_char='\\',
+               bottom_dx_char='/',
+               middle_char='|'):
+    """
+    Function that creates the comic of the dinosaur
+
+    :param text: text that appears inside the comic
+    :param horizontal_char: comic horizontal character
+    :param top_sx_char: first character at the top of the comic
+    :param top_dx_char: last character at the top of the comic
+    :param bottom_sx_char: first character at the bottom of the comic
+    :param bottom_dx_char: last character at the bottom of the comic
+    :param middle_char: character of the columns, between the first character at the top and bottom
+    :return: string
+    """
+    # Check length of first part of text
+    lines = text.splitlines()
+    length_line = len(lines[0]) + 2
+    # Build comic
+    comic = Template("""$top_sx_char$horizontal_char$top_dx_char
+$text
+$bottom_sx_char$horizontal_char$bottom_dx_char
+    """)
+    return comic.safe_substitute(
+        top_sx_char=top_sx_char,
+        top_dx_char=top_dx_char,
+        horizontal_char=horizontal_char * length_line,
+        text='\n'.join(["{0} {1} {0}".format(middle_char, line.ljust(len(lines[0]))) for line in lines]),
+        bottom_sx_char=bottom_sx_char,
+        bottom_dx_char=bottom_dx_char,
+        spaces=' ' * length_line
+    )
+
+
 def behavior_selector(behavior):
     """
     Function that creates the elements (eyes, tongue) to compose the dinosaur
