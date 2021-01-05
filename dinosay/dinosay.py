@@ -88,16 +88,14 @@ def make_comic(text,
     # Build comic
     comic = Template("""$top_sx_char$horizontal_char$top_dx_char
 $text
-$bottom_sx_char$horizontal_char$bottom_dx_char
-    """)
+$bottom_sx_char$horizontal_char$bottom_dx_char""")
     return comic.safe_substitute(
         top_sx_char=top_sx_char,
         top_dx_char=top_dx_char,
         horizontal_char=horizontal_char * length_line,
         text='\n'.join(["{0} {1} {0}".format(middle_char, line.ljust(len(lines[0]))) for line in lines]),
         bottom_sx_char=bottom_sx_char,
-        bottom_dx_char=bottom_dx_char,
-        spaces=' ' * length_line
+        bottom_dx_char=bottom_dx_char
     )
 
 

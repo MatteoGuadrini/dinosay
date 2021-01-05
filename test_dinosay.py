@@ -33,6 +33,10 @@ class TestCore(unittest.TestCase):
         normal = ds.behavior_selector('cyborg')
         self.assertEqual(normal.get('eye'), '= =')
 
+    def test_make_comic(self):
+        comic = ds.make_comic("Hi dinosay!")
+        self.assertEqual(comic, '/-------------\\\n| Hi dinosay! |\n\\-------------/')
+
 
 if __name__ == '__main__':
     unittest.main()
