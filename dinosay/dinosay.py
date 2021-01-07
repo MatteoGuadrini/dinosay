@@ -141,12 +141,12 @@ COMIC_TYPE = {
             'middle_char': '♡'
     },
     'scoop': {
-        'horizontal_char': '*',
-        'top_sx_char': '*',
-        'top_dx_char': '*',
-        'bottom_sx_char': '*',
-        'bottom_dx_char': '*',
-        'middle_char': '*'
+            'horizontal_char': '*',
+            'top_sx_char': '*',
+            'top_dx_char': '*',
+            'bottom_sx_char': '*',
+            'bottom_dx_char': '*',
+            'middle_char': '*'
     }
 }
 
@@ -199,16 +199,18 @@ def behavior_selector(behavior):
     """
     BEHAVIOR = {
         'normal': {'eye': EYE_TYPE.get('classic')},
-        'happy': {'eye': EYE_TYPE.get('happy')},
-        'joking': {'eye': EYE_TYPE.get('happy'), 'tongue': TONGUE_TYPE.get('classic')},
-        'lazy': {'eye': EYE_TYPE.get('closed')},
-        'tired': {'eye': EYE_TYPE.get('closed'), 'tongue': TONGUE_TYPE.get('classic')},
-        'angry': {'eye': EYE_TYPE.get('rage')},
-        'nerd': {'eye': EYE_TYPE.get('glass')},
-        'cyborg': {'eye': EYE_TYPE.get('borg')},
-        'dead': {'eye': EYE_TYPE.get('ko'), 'tongue': TONGUE_TYPE.get('classic')},
-        'trance': {'eye': EYE_TYPE.get('hypno')},
-        'stoned': {'eye': EYE_TYPE.get('stoned')}
+        'happy': {'eye': EYE_TYPE.get('happy'), 'comic': COMIC_TYPE.get('cartoon')},
+        'joking': {'eye': EYE_TYPE.get('happy'), 'tongue': TONGUE_TYPE.get('classic'),
+                   'comic': COMIC_TYPE.get('love')},
+        'lazy': {'eye': EYE_TYPE.get('closed'), 'comic': COMIC_TYPE.get('think')},
+        'tired': {'eye': EYE_TYPE.get('closed'), 'tongue': TONGUE_TYPE.get('classic'),
+                  'comic': COMIC_TYPE.get('think')},
+        'angry': {'eye': EYE_TYPE.get('rage'), 'comic': COMIC_TYPE.get('angry')},
+        'nerd': {'eye': EYE_TYPE.get('glass'), 'comic': COMIC_TYPE.get('table')},
+        'cyborg': {'eye': EYE_TYPE.get('borg'), 'comic': COMIC_TYPE.get('borg')},
+        'dead': {'eye': EYE_TYPE.get('ko'), 'tongue': TONGUE_TYPE.get('classic'), 'comic': COMIC_TYPE.get('bones')},
+        'trance': {'eye': EYE_TYPE.get('hypno'), 'comic': COMIC_TYPE.get('star')},
+        'stoned': {'eye': EYE_TYPE.get('stoned'), 'comic': COMIC_TYPE.get('scoop')}
     }
     return BEHAVIOR.get(behavior, BEHAVIOR['normal'])
 
