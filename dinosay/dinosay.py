@@ -59,6 +59,97 @@ TONGUE_TYPE = {
     'left': "/_/"
 }
 
+COMIC_TYPE = {
+    'cartoon': {
+            'horizontal_char': 'o',
+            'top_sx_char': '0',
+            'top_dx_char': '0',
+            'bottom_sx_char': 'O',
+            'bottom_dx_char': 'O',
+            'middle_char': 'o'
+    },
+    'think': {
+            'horizontal_char': '-',
+            'top_sx_char': '(',
+            'top_dx_char': ')',
+            'bottom_sx_char': '(',
+            'bottom_dx_char': ')',
+            'middle_char': '|'
+        },
+    'angry': {
+            'horizontal_char': '◇',
+            'top_sx_char': '<',
+            'top_dx_char': '>',
+            'bottom_sx_char': '<',
+            'bottom_dx_char': '>',
+            'middle_char': '◇'
+        },
+    'star': {
+            'horizontal_char': '☆',
+            'top_sx_char': '☆',
+            'top_dx_char': '☆',
+            'bottom_sx_char': '☆',
+            'bottom_dx_char': '☆',
+            'middle_char': '☆'
+    },
+    'hungry': {
+            'horizontal_char': '-',
+            'top_sx_char': '{',
+            'top_dx_char': '}',
+            'bottom_sx_char': '{',
+            'bottom_dx_char': '}',
+            'middle_char': '^'
+    },
+    'math': {
+            'horizontal_char': '=',
+            'top_sx_char': '+',
+            'top_dx_char': '-',
+            'bottom_sx_char': '*',
+            'bottom_dx_char': '/',
+            'middle_char': '%'
+    },
+    'borg': {
+            'horizontal_char': '=',
+            'top_sx_char': 'o',
+            'top_dx_char': 'o',
+            'bottom_sx_char': 'o',
+            'bottom_dx_char': 'o',
+            'middle_char': '='
+    },
+    'table': {
+            'horizontal_char': '-',
+            'top_sx_char': '+',
+            'top_dx_char': '+',
+            'bottom_sx_char': '+',
+            'bottom_dx_char': '+',
+            'middle_char': '|'
+    },
+    'bones': {
+            'horizontal_char': '=',
+            'top_sx_char': '%',
+            'top_dx_char': '%',
+            'bottom_sx_char': '%',
+            'bottom_dx_char': '%',
+            'middle_char': '+'
+    },
+    'love': {
+            'horizontal_char': '♡',
+            'top_sx_char': '♡',
+            'top_dx_char': '♡',
+            'bottom_sx_char': '♡',
+            'bottom_dx_char': '♡',
+            'middle_char': '♡'
+    },
+    'scoop': {
+        'horizontal_char': '*',
+        'top_sx_char': '*',
+        'top_dx_char': '*',
+        'bottom_sx_char': '*',
+        'bottom_dx_char': '*',
+        'middle_char': '*'
+    }
+}
+
 
 # endregion
 
