@@ -61,96 +61,119 @@ TONGUE_TYPE = {
 
 COMIC_TYPE = {
     'cartoon': {
-            'horizontal_char': 'o',
-            'top_sx_char': '0',
-            'top_dx_char': '0',
-            'bottom_sx_char': 'O',
-            'bottom_dx_char': 'O',
-            'middle_char': 'o'
+        'horizontal_char': 'o',
+        'top_sx_char': '0',
+        'top_dx_char': '0',
+        'bottom_sx_char': 'O',
+        'bottom_dx_char': 'O',
+        'middle_char': 'o'
     },
     'think': {
-            'horizontal_char': '-',
-            'top_sx_char': '(',
-            'top_dx_char': ')',
-            'bottom_sx_char': '(',
-            'bottom_dx_char': ')',
-            'middle_char': '|'
-        },
+        'horizontal_char': '-',
+        'top_sx_char': '(',
+        'top_dx_char': ')',
+        'bottom_sx_char': '(',
+        'bottom_dx_char': ')',
+        'middle_char': '|'
+    },
     'angry': {
-            'horizontal_char': '◇',
-            'top_sx_char': '<',
-            'top_dx_char': '>',
-            'bottom_sx_char': '<',
-            'bottom_dx_char': '>',
-            'middle_char': '◇'
-        },
+        'horizontal_char': '◇',
+        'top_sx_char': '<',
+        'top_dx_char': '>',
+        'bottom_sx_char': '<',
+        'bottom_dx_char': '>',
+        'middle_char': '◇'
+    },
     'star': {
-            'horizontal_char': '☆',
-            'top_sx_char': '☆',
-            'top_dx_char': '☆',
-            'bottom_sx_char': '☆',
-            'bottom_dx_char': '☆',
-            'middle_char': '☆'
+        'horizontal_char': '☆',
+        'top_sx_char': '☆',
+        'top_dx_char': '☆',
+        'bottom_sx_char': '☆',
+        'bottom_dx_char': '☆',
+        'middle_char': '☆'
     },
     'hungry': {
-            'horizontal_char': '-',
-            'top_sx_char': '{',
-            'top_dx_char': '}',
-            'bottom_sx_char': '{',
-            'bottom_dx_char': '}',
-            'middle_char': '^'
+        'horizontal_char': '-',
+        'top_sx_char': '{',
+        'top_dx_char': '}',
+        'bottom_sx_char': '{',
+        'bottom_dx_char': '}',
+        'middle_char': '^'
     },
     'math': {
-            'horizontal_char': '=',
-            'top_sx_char': '+',
-            'top_dx_char': '-',
-            'bottom_sx_char': '*',
-            'bottom_dx_char': '/',
-            'middle_char': '%'
+        'horizontal_char': '=',
+        'top_sx_char': '+',
+        'top_dx_char': '-',
+        'bottom_sx_char': '*',
+        'bottom_dx_char': '/',
+        'middle_char': '%'
     },
     'borg': {
-            'horizontal_char': '=',
-            'top_sx_char': 'o',
-            'top_dx_char': 'o',
-            'bottom_sx_char': 'o',
-            'bottom_dx_char': 'o',
-            'middle_char': '='
+        'horizontal_char': '=',
+        'top_sx_char': 'o',
+        'top_dx_char': 'o',
+        'bottom_sx_char': 'o',
+        'bottom_dx_char': 'o',
+        'middle_char': '='
     },
     'table': {
-            'horizontal_char': '-',
-            'top_sx_char': '+',
-            'top_dx_char': '+',
-            'bottom_sx_char': '+',
-            'bottom_dx_char': '+',
-            'middle_char': '|'
+        'horizontal_char': '-',
+        'top_sx_char': '+',
+        'top_dx_char': '+',
+        'bottom_sx_char': '+',
+        'bottom_dx_char': '+',
+        'middle_char': '|'
     },
     'bones': {
-            'horizontal_char': '=',
-            'top_sx_char': '%',
-            'top_dx_char': '%',
-            'bottom_sx_char': '%',
-            'bottom_dx_char': '%',
-            'middle_char': '+'
+        'horizontal_char': '=',
+        'top_sx_char': '%',
+        'top_dx_char': '%',
+        'bottom_sx_char': '%',
+        'bottom_dx_char': '%',
+        'middle_char': '+'
     },
     'love': {
-            'horizontal_char': '♡',
-            'top_sx_char': '♡',
-            'top_dx_char': '♡',
-            'bottom_sx_char': '♡',
-            'bottom_dx_char': '♡',
-            'middle_char': '♡'
+        'horizontal_char': '♡',
+        'top_sx_char': '♡',
+        'top_dx_char': '♡',
+        'bottom_sx_char': '♡',
+        'bottom_dx_char': '♡',
+        'middle_char': '♡'
     },
     'scoop': {
-            'horizontal_char': '*',
-            'top_sx_char': '*',
-            'top_dx_char': '*',
-            'bottom_sx_char': '*',
-            'bottom_dx_char': '*',
-            'middle_char': '*'
+        'horizontal_char': '*',
+        'top_sx_char': '*',
+        'top_dx_char': '*',
+        'bottom_sx_char': '*',
+        'bottom_dx_char': '*',
+        'middle_char': '*'
     }
 }
 
 DINO_TYPE = {
+    'tyrannosaurus': r"""$comic
+                                                 ____
+     ___                                      .-~    '.
+    `-._~-.                                  / /  ~$eye\   )
+         \  \                               | /  \~\.  `\
+         ]  |                              /  |  |< ~\(..)
+        /   !                        _.--~T   \  \<   .,,
+       /   /                 ____.--~ .    _  /~\ \< /
+      /   /             .-~~'        /|   /o\ /-~\ \_|
+     /   /             /     )      |o|  / /|o/_   '--'
+    /   /           .-'(     l__   _j \_/ / /\|~    .
+    /    l          /    \       ~~~|    `/ / / \.__/l_
+    |     \     _.-'      ~-\__     l      /_/~-.___.--~
+    |      ~---~           /   ~~'---\_    __[o,
+    l  .                _.    ___     _>-/~
+    \  \     .      .-~   .-~   ~>--'  /
+     \  ~---'            /         _.-'
+      '-.,_____.,_  _.--~\     _.-~
+                  ~~     (   _}
+                         `. ~(
+                           )  \
+                     /,`--'~\--'~\
+    """,
     'dimetrodon': r"""$comic
                                 _._
                               _/:|:
@@ -176,6 +199,7 @@ DINO_TYPE = {
                             <_oo_>
     """,
     'ankylosaur': r"""$comic
+    
                             /~~~~~~~~~~~~\_
        _+=+_             _[~  /~~~~~~~~~~~~\_     
       {''|''}         [~~~    [~   /~~~~~~~~~\_
@@ -204,6 +228,7 @@ DINO_TYPE = {
                                          ~~'
     """,
     'stegosaurus': r"""$comic
+    
                             .       .
                            / `.   .' \
                    .---.  <    > <    >  .---.
@@ -222,6 +247,7 @@ DINO_TYPE = {
                  '---.o___,'       .o___,'
     """,
     'deinonychus': r"""$comic
+    
                                                         .--.__
                                                       .~ ($eye)  ~~~---_
                                                      {     `-_~,,,,,,)
@@ -247,6 +273,7 @@ DINO_TYPE = {
                     (_.-.'O'-'.
     """,
     'pterodactyl': r"""$comic
+    
                                  <\              _
                                   \\          _/{
                            _       \\       _-   -_
@@ -266,6 +293,7 @@ DINO_TYPE = {
                                 '
     """,
     'archaeopteryx': r"""$comic
+    
                             _
                         __~$eye~_
                         ~~;  ~_
@@ -284,6 +312,7 @@ DINO_TYPE = {
                            '/||\'
     """,
     'maiasaur': r"""$comic
+    
                                          _..-=~=-._
                                     _.-~'          ~.
                         __..---~~~~~                 ~.
@@ -303,6 +332,7 @@ DINO_TYPE = {
                            '''                 -----
     """,
     'pleisiosaur': r"""$comic
+    
     
                        _..--+~/$eye-~--.
                    _-=~      (  .   '
@@ -402,6 +432,32 @@ DINO_TYPE = {
 # endregion
 
 # region functions
+def dinoprint(message, body, behavior='normal'):
+    """
+    Print dinosaur body and message
+
+    :param message: text message
+    :param body: dinoaur body
+    :param behavior: name of behavior
+    :return:
+    """
+    # Get element on behavior dictionary
+    element = behavior_selector(behavior)
+    # Create message comic
+    comic_type = element.get('comic', {})
+    comic = make_comic(message, **comic_type)
+    # Print dinosaur
+    eyes = element.get('eye')
+    tongue = element.get('tongue')
+    dinosaur = Template(body)
+    print(dinosaur.safe_substitute(
+        eye=eyes[0],
+        eyes=eyes,
+        tongue=tongue if tongue else '',
+        comic=comic
+    ))
+
+
 def make_comic(text,
                horizontal_char='-',
                top_sx_char='/',
