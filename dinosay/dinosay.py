@@ -26,8 +26,9 @@ Module to print paleolithic comics
 
 # region imports
 import dinosay
-from argparse import ArgumentParser
+from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from textwrap import wrap
+from string import Template
 
 # endregion
 
@@ -53,14 +54,471 @@ EYE_TYPE = {
 }
 
 TONGUE_TYPE = {
+    'classic': 'U',
     'right': "\_\\",
     'left': "/_/"
+}
+
+COMIC_TYPE = {
+    'cartoon': {
+        'horizontal_char': 'o',
+        'top_sx_char': '0',
+        'top_dx_char': '0',
+        'bottom_sx_char': 'O',
+        'bottom_dx_char': 'O',
+        'middle_char': 'o'
+    },
+    'think': {
+        'horizontal_char': '-',
+        'top_sx_char': '(',
+        'top_dx_char': ')',
+        'bottom_sx_char': '(',
+        'bottom_dx_char': ')',
+        'middle_char': '|'
+    },
+    'angry': {
+        'horizontal_char': '◇',
+        'top_sx_char': '<',
+        'top_dx_char': '>',
+        'bottom_sx_char': '<',
+        'bottom_dx_char': '>',
+        'middle_char': '◇'
+    },
+    'star': {
+        'horizontal_char': '☆',
+        'top_sx_char': '☆',
+        'top_dx_char': '☆',
+        'bottom_sx_char': '☆',
+        'bottom_dx_char': '☆',
+        'middle_char': '☆'
+    },
+    'hungry': {
+        'horizontal_char': '-',
+        'top_sx_char': '{',
+        'top_dx_char': '}',
+        'bottom_sx_char': '{',
+        'bottom_dx_char': '}',
+        'middle_char': '^'
+    },
+    'math': {
+        'horizontal_char': '=',
+        'top_sx_char': '+',
+        'top_dx_char': '-',
+        'bottom_sx_char': '*',
+        'bottom_dx_char': '/',
+        'middle_char': '%'
+    },
+    'borg': {
+        'horizontal_char': '=',
+        'top_sx_char': 'o',
+        'top_dx_char': 'o',
+        'bottom_sx_char': 'o',
+        'bottom_dx_char': 'o',
+        'middle_char': '='
+    },
+    'table': {
+        'horizontal_char': '-',
+        'top_sx_char': '+',
+        'top_dx_char': '+',
+        'bottom_sx_char': '+',
+        'bottom_dx_char': '+',
+        'middle_char': '|'
+    },
+    'bones': {
+        'horizontal_char': '=',
+        'top_sx_char': '%',
+        'top_dx_char': '%',
+        'bottom_sx_char': '%',
+        'bottom_dx_char': '%',
+        'middle_char': '+'
+    },
+    'love': {
+        'horizontal_char': '♡',
+        'top_sx_char': '♡',
+        'top_dx_char': '♡',
+        'bottom_sx_char': '♡',
+        'bottom_dx_char': '♡',
+        'middle_char': '♡'
+    },
+    'scoop': {
+        'horizontal_char': '*',
+        'top_sx_char': '*',
+        'top_dx_char': '*',
+        'bottom_sx_char': '*',
+        'bottom_dx_char': '*',
+        'middle_char': '*'
+    }
+}
+
+DINO_TYPE = {
+    'tyrannosaurus': r"""$comic
+                                                 ____
+     ___                                      .-~    '.
+    `-._~-.                                  / /  ~$eye\   )
+         \  \                               | /  \~\.  `\
+         ]  |                              /  |  |< ~\(..)
+        /   !                        _.--~T   \  \<   .,,
+       /   /                 ____.--~ .    _  /~\ \< /
+      /   /             .-~~'        /|   /o\ /-~\ \_|
+     /   /             /     )      |o|  / /|o/_   '--'
+    /   /           .-'(     l__   _j \_/ / /\|~    .
+    /    l          /    \       ~~~|    `/ / / \.__/l_
+    |     \     _.-'      ~-\__     l      /_/~-.___.--~
+    |      ~---~           /   ~~'---\_    __[o,
+    l  .                _.    ___     _>-/~
+    \  \     .      .-~   .-~   ~>--'  /
+     \  ~---'            /         _.-'
+      '-.,_____.,_  _.--~\     _.-~
+                  ~~     (   _}
+                         `. ~(
+                           )  \
+                     /,`--'~\--'~\
+    """,
+    'dimetrodon': r"""$comic
+                                _._
+                              _/:|:
+                             /||||||.
+                             ||||||||.
+                            /|||||||||:
+                           /|||||||||||
+                          .|||||||||||||
+                          | ||||||||||||:
+                        _/| |||||||||||||:_=---.._
+                        | | |||||:'''':||  '~-._  '-.
+                      _/| | ||'         '-._   _:    ;
+                      | | | '               '~~     _;
+                      | '                _.=._    _-~
+                   _.~                  {     '-_'
+           _.--=.-~       _.._          {_       }
+       _.-~   $eye-,        {    '-._     _. '~==+  |
+      ('          }       \_      \_.=~       |  |
+      `,,,,,,,'  /_         ~-_    )         <_oo_>
+       $tongue `-----~~/ /'===...===' +   /
+               <_oo_>         /  //
+                             /  //
+                            <_oo_>
+    """,
+    'ankylosaur': r"""$comic
+    
+                            /~~~~~~~~~~~~\_
+       _+=+_             _[~  /~~~~~~~~~~~~\_     
+      {''|''}         [~~~    [~   /~~~~~~~~~\_
+       ''':-'~[~[~'~[~  ((++     [~  _/~~~~~~~~\_
+            '=_   [    ,==, ((++    [    /~~~~~~~\-~~~-.
+               ~-_ _=+-(   )/   ((++  .~~~.[~~~~(  {$eye} \`.
+                       /   }\ /     (     }     (   .   ''}
+                      (  .+   \ /  //     )    / .,  ''''/
+                      \\  \     \ (   .+~~\_  /.= /'''''$tongue
+                      <'_V_'>      \\  \    ~~~~~~\\  \
+                                    \\  \          \\  \
+                                    <'_V_'>        <'_V_'>
+    """,
+    'hypsilophodon': r"""$comic
+                                  ___......__             _ 
+                              _.-'           ~-_       _.=$eye~~-_
+      --=====-.-.-_----------~   .--.       _   -.__.-~ ( ___==>
+                    '''--...__  (    \ \\\ { )       _.-~   $tongue
+                              =_ ~_  \\-~~~//~~~~-=-~
+                               |-=-~_ \\   \\
+                               |_/   =. )   ~}
+                               |}      ||
+                              //       ||
+                            _//        {{
+                         '='~'          \\_
+                                         ~~'
+    """,
+    'stegosaurus': r"""$comic
+    
+                            .       .
+                           / `.   .' \
+                   .---.  <    > <    >  .---.
+                   |    \  \ - ~ ~ - /  /    |
+                    ~-..-~             ~-..-~
+                \~~~\.'                    `./~~~/
+                 \__/                        \__/
+                  /                  .-    .  \
+           _._ _.-    .-~ ~-.       /       }   \/~~~/
+       _.-'$eye  }~     /       }     {        ;    \__/
+      {'__,  /      (       /      {       /      `. ,~~|   .     .
+      $tongue`''''='~~-.__(      /_      |      /- _      `..-'   \\   //
+                   / \   =/  ~~--~~{    ./|    ~-.     `-..__\\_//_.-'
+                  {   \  +\         \  =\ (        ~ - . _ _ _..---~
+                  |  | {   }         \   \_\
+                 '---.o___,'       .o___,'
+    """,
+    'deinonychus': r"""$comic
+    
+                                                        .--.__
+                                                      .~ ($eye)  ~~~---_
+                                                     {     `-_~,,,,,,)
+                                                     {    (_  ',
+                                                      ~    . = _',
+                                                       ~-   '.  =-'
+                                                         ~     :
+      .                                             _,.-~     ('');
+      '.                                         .-~        \  \ ;
+        ':-_                                _.--~            \  \;      _-=,.
+          ~-:-.__                       _.-~                 {  '---- _'-=,.
+             ~-._~--._             __.-~                     ~---------=,.`
+                 ~~-._~~-----~~~~~~       .+++~~~~~~~~-__   /
+                      ~-.,____           {   -     +   }  _/
+                              ~~-.______{_    _ -=\ / /_.~
+                                   :      ~--~    // /         ..-
+                                   :   / /      // /         ((
+                                   :  / /      {   `-------,. ))
+                                   :   /        ''=--------. }o
+                      .=._________,'  )                     ))
+                      )  _________ -''                     ~~
+                     / /  _ _
+                    (_.-.'O'-'.
+    """,
+    'pterodactyl': r"""$comic
+    
+                                 <\              _
+                                  \\          _/{
+                           _       \\       _-   -_
+                         /{        / `\   _-     - -_
+                       _~  =      ( $eye  \ -        -  -_
+                     _- -   ~-_   \( =\ \           -  -_
+                   _~  -       ~_ | 1 :\ \      _-~-_ -  -_
+                 _-   -          ~  |V: \ \  _-~     ~-_-  -_
+              _-~   -            /  | :  \ \            ~-_- -_
+           _-~    -   _.._      {   | : _-``               ~- _-_
+        _-~   -__..--~    ~-_  {   : \:}
+      =~__.--~~              ~-_\  :  /
+                                 \ : /__
+                                //`Y'--\\
+                               <+       \\
+                                \\      WWW
+                                '
+    """,
+    'archaeopteryx': r"""$comic
+    
+                            _
+                        __~$eye~_
+                        ~~;  ~_
+          _             $tongue   ~  ~_                _
+         '_\;__._._._._._._]   ~_._._._._._.__;/_`
+         '(/'/'/'/'|'|'|'| (    )|'|'|'|'\'\'\'\)'
+         (/ / / /, | | | |(/    \) | | | ,\ \ \ \)
+        (/ / / / / | | | ~(/    \) ~ | | \ \ \ \ \)
+       (/ / / / /  ~ ~ ~   (/  \)    ~ ~  \ \ \ \ \)
+      (/ / / / ~          / (||)|          ~ \ \ \ \)
+      ~ / / ~            M  /||\M             ~ \ \ ~
+       ~ ~                  /||\                 ~ ~
+                           //||\\
+                           //||\\
+                           //||\\
+                           '/||\'
+    """,
+    'maiasaur': r"""$comic
+    
+                                         _..-=~=-._
+                                    _.-~'          ~.
+                        __..---~~~~~                 ~.
+                   _.-~~                      _.._     ~.
+               _ -~_                         /    \      ;
+              ( ` '$eye)                       {      |      :
+              /                             |      |      :
+             /     /}         (  )          |      |     .-
+            /     //-=-~-_-_  |  |          \      ;    .'
+           /     //     | =._-|  }/ / / /_.==\     ; _.' 
+          ( oo  //      = )  ~| /.__..-='|    \    :' 
+           ====||      / /    + )    \   |_.-~`\   :
+            $tongue          / /    / /      \  |     ([ ]) 
+                     /_/    / /       (  ]     `/ \' 
+                    (((|   /_/      __/_/__    -| |--
+                          (((|      -----     __|_|__
+                           '''                 -----
+    """,
+    'pleisiosaur': r"""$comic
+    
+    
+                       _..--+~/$eye-~--.
+                   _-=~      (  .   '
+                _-~     _.--=.\ \''''
+              _~      _-       \ \$tongue_\
+             =      _=          '--'
+            '      =                             .
+           :      :       ____                   '=_. ___
+      ___  |      ;                            ____ '~--.~.
+           ;      ;                               _____  } |
+        ___=       \ ___ __     __..-...__           ___/__/__
+           :        =_     _.-~~          ~~--.__
+      _____ \         ~-+-~                   ___~=_______
+           ~@#~~ == ...______ __ ___ _--~~--_
+    """,
+    'brachiosaur': r"""$comic
+    
+         _
+       .~$eye`,
+      {__,  \
+      $tongue    \' \
+           \  \
+            \  \
+             \  `._            __.__
+              \    ~-._  _.==~~     ~~--.._
+               \        '                  ~-.
+                \      _-   -_                `.
+                 \    /       }        .-    .  \
+                  `. |      /  }      (       ;  \
+                    `|     /  /       (       :   '\
+                     \    |  /        |      /       \
+                      |     /`-.______.\     |~-.      \
+                      |   |/           (     |   `.      \_
+                      |   ||            ~\   \      '._    `-.._____..----..___
+                      |   |/             _\   \         ~-.__________.-~~~~~~~~~'''
+                    .o'___/            .o______}
+    """,
+    'corythosaur': r"""$comic
+    
+                                             .--.
+                                            {(~~)}
+                           __..._         _.''''$eye`,._
+                       _.-'      '~-._.-~~     (  .__}
+                    _-~                       _.`--$tongue
+                 _-~     _         /~\    _.-~     
+              _-~     ,-~ ~-.      \\ ) .~
+            .'       {       )      \\|'
+          .'         {       /  _.-' |:
+        .'            \     /.-'     \\
+      .'        __.-~.=\   /          `}
+      ;      _.-~   / ./ |  }
+      {    _.'     / /   | /
+      {    =      {=+__  | :
+      :   :_      `-- = \,_`-,.
+       `.   '=,_
+          '-.___'_::='
+    """,
+    'parasaurolophus': r"""$comic
+    
+                _
+               //
+              //
+           __/(
+       _.~-$eye  ~-.
+      {_____)    `.           _..=~~~~=._
+       $tongue     ~-_    \      _.=~           '=.
+               \    `._.=~            .=.   :=._
+                -         __         (   \   : \)
+                 ~.      (  }       (     |   : :
+                   `:     \ \        \    |\   ; :
+                     \     \ }        \   / |  ;  }
+                      `-.__//__.==~~=._\ (_/  ;  ;
+                          //           | |/  ;  ;
+                         {{       _____|_/ ;   ;
+                          `      ---- _=.=`   ~ 
+                                  __:='    .='
+                              ..:~____.==''
+    """,
+    'triceratops': r"""$comic
+    
+                            __.--'~~~~~`--.
+         ..       __.    .-~               ~-.
+         ((\     /   `}.~                     `.
+          \\\  .{     }               /     \   \
+      (\   \\~~       }              |       }   \
+       \`.-~ -$eye~     }  ,-,.         |       )    \
+       (___     ) _}  (    :        |    / /      `._
+        $tongue`----._-~.     _\ \ |_       \   / /-.__     `._
+               ~~----~~  \ \| ~~--~~~(  + /     ~-._    ~-._
+                         /  /         \  \          ~--.,___~_-_.
+                      __/  /          _\  )
+                    .<___.'         .<___/
+    """
 }
 
 
 # endregion
 
 # region functions
+def dinoprint(message, body, behavior='normal'):
+    """
+    Print dinosaur body and message
+
+    :param message: text message
+    :param body: dinoaur body
+    :param behavior: name of behavior
+    :return:
+    """
+    # Get element on behavior dictionary
+    element = behavior_selector(behavior)
+    # Create message comic
+    comic_type = element.get('comic', {})
+    comic = make_comic(message, **comic_type)
+    # Print dinosaur
+    eyes = element.get('eye')
+    tongue = element.get('tongue')
+    dinosaur = Template(body)
+    print(dinosaur.safe_substitute(
+        eye=eyes[0],
+        eyes=eyes,
+        tongue=tongue if tongue else '',
+        comic=comic
+    ))
+
+
+def make_comic(text,
+               horizontal_char='-',
+               top_sx_char='/',
+               top_dx_char='\\',
+               bottom_sx_char='\\',
+               bottom_dx_char='/',
+               middle_char='|'):
+    """
+    Function that creates the comic of the dinosaur
+
+    :param text: text that appears inside the comic
+    :param horizontal_char: comic horizontal character
+    :param top_sx_char: first character at the top of the comic
+    :param top_dx_char: last character at the top of the comic
+    :param bottom_sx_char: first character at the bottom of the comic
+    :param bottom_dx_char: last character at the bottom of the comic
+    :param middle_char: character of the columns, between the first character at the top and bottom
+    :return: string
+    """
+    # Check length of first part of text
+    lines = text.splitlines()
+    length_line = len(lines[0]) + 2
+    # Build comic
+    comic = Template("""$top_sx_char$horizontal_char$top_dx_char
+$text
+$bottom_sx_char$horizontal_char$bottom_dx_char""")
+    return comic.safe_substitute(
+        top_sx_char=top_sx_char,
+        top_dx_char=top_dx_char,
+        horizontal_char=horizontal_char * length_line,
+        text='\n'.join(["{0} {1} {0}".format(middle_char, line.ljust(len(lines[0]))) for line in lines]),
+        bottom_sx_char=bottom_sx_char,
+        bottom_dx_char=bottom_dx_char
+    )
+
+
+def behavior_selector(behavior):
+    """
+    Function that creates the elements (eyes, tongue) to compose the dinosaur
+
+    :param behavior: behavior selected
+    :return: dictionary
+    """
+    BEHAVIOR = {
+        'normal': {'eye': EYE_TYPE.get('classic')},
+        'happy': {'eye': EYE_TYPE.get('happy'), 'comic': COMIC_TYPE.get('cartoon')},
+        'joking': {'eye': EYE_TYPE.get('happy'), 'tongue': TONGUE_TYPE.get('classic'),
+                   'comic': COMIC_TYPE.get('love')},
+        'lazy': {'eye': EYE_TYPE.get('closed'), 'comic': COMIC_TYPE.get('think')},
+        'tired': {'eye': EYE_TYPE.get('closed'), 'tongue': TONGUE_TYPE.get('classic'),
+                  'comic': COMIC_TYPE.get('think')},
+        'angry': {'eye': EYE_TYPE.get('rage'), 'comic': COMIC_TYPE.get('angry')},
+        'nerd': {'eye': EYE_TYPE.get('glass'), 'comic': COMIC_TYPE.get('table')},
+        'cyborg': {'eye': EYE_TYPE.get('borg'), 'comic': COMIC_TYPE.get('borg')},
+        'dead': {'eye': EYE_TYPE.get('ko'), 'tongue': TONGUE_TYPE.get('classic'), 'comic': COMIC_TYPE.get('bones')},
+        'trance': {'eye': EYE_TYPE.get('hypno'), 'comic': COMIC_TYPE.get('star')},
+        'stoned': {'eye': EYE_TYPE.get('stoned'), 'comic': COMIC_TYPE.get('scoop')}
+    }
+    return BEHAVIOR.get(behavior, BEHAVIOR['normal'])
+
+
 def wrap_text(text, width=40):
     """
     Function that splits a string of N characters
@@ -79,7 +537,8 @@ def parse_arguments():
     :return: parser object
     """
     # Create a principal parser
-    parser_object = ArgumentParser(prog='dinosay', description='print messages via ASCII dinosaurs')
+    parser_object = ArgumentParser(prog='dinosay', description='print messages via ASCII dinosaurs',
+                                   formatter_class=RawDescriptionHelpFormatter, epilog=LOGO)
     parser_object.add_argument('--version', '-v', action='version', version='%(prog)s ' + dinosay.__version__)
     parser_object.add_argument('message', help='message to print')
     input_group = parser_object.add_mutually_exclusive_group()
