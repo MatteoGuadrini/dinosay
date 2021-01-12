@@ -441,6 +441,29 @@ COLORS = {
 
 # endregion
 
+# region classes
+class Dino:
+    """
+    ASCII dinosaur class
+    """
+
+    def __init__(self, body, message=None, behavior=None, color=None):
+        """
+        ASCII dinosaur object
+
+        :param body: ASCII body of dinosaur
+        :param message: message to print
+        :param behavior: behavior that determines the value of $ eye, $ tongue and $ comic in the body
+        :param color: color of dinosaur. See COLORS dictionary.
+        """
+        self.body = body
+        self.message = message
+        self.behavior = behavior
+        self.color = color
+
+
+# endregion
+
 # region functions
 def dinoprint(message, body, behavior='normal'):
     """
