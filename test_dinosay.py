@@ -39,6 +39,10 @@ class TestCore(unittest.TestCase):
         comic2 = ds.make_comic("Hi dinosay!", **ds.COMIC_TYPE.get('cartoon'))
         self.assertEqual(comic2, '0ooooooooooooo0\no Hi dinosay! o\nOoooooooooooooO')
 
+    def test_dino_object(self):
+        trex = ds.Dino(ds.DINO_TYPE)
+        self.assertIsInstance(trex, ds.Dino)
+
 
 if __name__ == '__main__':
     unittest.main()
