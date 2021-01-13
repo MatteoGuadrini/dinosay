@@ -459,8 +459,17 @@ class Dino:
         self.message = message
         self.behavior = behavior
         # Check color name
-        if color.lower() in self.COLORS:
+        if color and color.lower() in self.COLORS:
             self.color = self.COLORS.get(color.lower())
+
+    def apply_color(self):
+        """
+        Apply color to body
+
+        :return: None
+        """
+        if self.color:
+            self.body = self.color.substitute(body=self.body)
 
 
 # endregion
