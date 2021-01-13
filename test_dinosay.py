@@ -40,8 +40,13 @@ class TestCore(unittest.TestCase):
         self.assertEqual(comic2, '0ooooooooooooo0\no Hi dinosay! o\nOoooooooooooooO')
 
     def test_dino_object(self):
-        trex = ds.Dino(ds.DINO_TYPE)
+        trex = ds.Dino(ds.DINO_TYPE['tyrannosaurus'])
         self.assertIsInstance(trex, ds.Dino)
+
+    def test_dino_color(self):
+        trex = ds.Dino(ds.DINO_TYPE['tyrannosaurus'], color='green')
+        trex.apply_color()
+        self.assertIn('\033[92m', trex.body)
 
 
 if __name__ == '__main__':
