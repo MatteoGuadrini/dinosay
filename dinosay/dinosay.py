@@ -428,16 +428,6 @@ DINO_TYPE = {
     """
 }
 
-COLORS = {
-    'purple': Template('\033[95m$body\033[0m'),
-    'cyan': Template('\033[96m$body\033[0m'),
-    'darkcyan': Template('\033[36m$body\033[0m'),
-    'blue': Template('\033[94m$body\033[0m'),
-    'green': Template('\033[92m$body\033[0m'),
-    'yellow': Template('\033[93m$body\033[0m'),
-    'red': Template('\033[91m$body\033[0m')
-}
-
 
 # endregion
 
@@ -446,6 +436,15 @@ class Dino:
     """
     ASCII dinosaur class
     """
+    COLORS = {
+        'purple': Template('\033[95m$body\033[0m'),
+        'cyan': Template('\033[96m$body\033[0m'),
+        'darkcyan': Template('\033[36m$body\033[0m'),
+        'blue': Template('\033[94m$body\033[0m'),
+        'green': Template('\033[92m$body\033[0m'),
+        'yellow': Template('\033[93m$body\033[0m'),
+        'red': Template('\033[91m$body\033[0m')
+    }
 
     def __init__(self, body, message=None, behavior=None, color=None):
         """
@@ -459,7 +458,9 @@ class Dino:
         self.body = body
         self.message = message
         self.behavior = behavior
-        self.color = color
+        # Check color name
+        if color.lower() in self.COLORS:
+            self.color = self.COLORS.get(color.lower())
 
 
 # endregion
