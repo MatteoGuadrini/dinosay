@@ -443,7 +443,8 @@ class Dino:
         'blue': Template('\033[94m$body\033[0m'),
         'green': Template('\033[92m$body\033[0m'),
         'yellow': Template('\033[93m$body\033[0m'),
-        'red': Template('\033[91m$body\033[0m')
+        'red': Template('\033[91m$body\033[0m'),
+        'default': Template('\033[0m$body\033[0m')
     }
 
     def __init__(self, body, message=None, behavior=None, color=None):
@@ -458,9 +459,11 @@ class Dino:
         self.body = body
         self.message = message
         self.behavior = behavior
+        # Save original body for resetting color
+        self.original = body
         # Check color name
         if color and color.lower() in self.COLORS:
-            self.color = self.COLORS.get(color.lower())
+            self.color = self.COLORS.get(color.lower(), self.COLORS['default'])
 
     def apply_color(self):
         """
@@ -468,8 +471,19 @@ class Dino:
 
         :return: None
         """
-        if self.color:
-            self.body = self.color.substitute(body=self.body)
+        if isinstance(self.color, str):
+            # Check color name
+            if self.color.lower() in self.COLORS:
+                self.color = self.COLORS.get(self.color.lower(), self.COLORS['default'])
+        self.body = self.color.substitute(body=self.body)
+
+    def reset_color(self):
+        """
+        Reset color body
+
+        :return: None
+        """
+        self.body = self.original
 
 
 # endregion
