@@ -47,6 +47,8 @@ class TestCore(unittest.TestCase):
         trex = ds.Dino(ds.DINO_TYPE['tyrannosaurus'], color='green')
         trex.apply_color()
         self.assertIn('\033[92m', trex.body)
+        trex.reset_color()
+        self.assertEqual(trex.body, trex.original)
 
 
 if __name__ == '__main__':
