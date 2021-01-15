@@ -25,7 +25,6 @@ Module to print paleolithic comics
 """
 
 # region imports
-import dinosay
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from textwrap import wrap
 from string import Template
@@ -33,6 +32,8 @@ from string import Template
 # endregion
 
 # region variables
+__version__ = '0.1.0'
+
 LOGO = r"""
  _____     __     __   __     ______     ______     ______     __  __   
 /\  __-.  /\ \   /\ "-.\ \   /\  __ \   /\  ___\   /\  __ \   /\ \_\ \  
@@ -443,8 +444,7 @@ class Dino:
         'blue': Template('\033[94m$body\033[0m'),
         'green': Template('\033[92m$body\033[0m'),
         'yellow': Template('\033[93m$body\033[0m'),
-        'red': Template('\033[91m$body\033[0m'),
-        'default': Template('\033[0m$body\033[0m')
+        'red': Template('\033[91m$body\033[0m')
     }
 
     def __init__(self, body, message=None, behavior=None, color=None):
@@ -464,6 +464,8 @@ class Dino:
         # Check color name
         if color and color.lower() in self.COLORS:
             self.color = self.COLORS.get(color.lower(), self.COLORS['default'])
+        else:
+            self.color = None
 
     def apply_color(self):
         """
@@ -489,6 +491,30 @@ class Dino:
 # endregion
 
 # region functions
+def dinospeak():
+    """
+    Main function
+
+    :return: None
+    """
+    # Capture all command line arguments
+    option = parse_arguments()
+    args = option.parse_args()
+    # Wrap the message
+    message = wrap_text(args.message, args.wrap) if args.wrap else wrap_text(args.message)
+    # Build ASCII dinosaur
+    dino = Dino(DINO_TYPE.get(args.dinosaur, DINO_TYPE['tyrannosaurus']),
+                message,
+                behavior=args.behavior,
+                color=args.color
+                )
+    # Check color
+    if dino.color:
+        dino.apply_color()
+    # Print
+    dinoprint(dino.message, dino.body, dino.behavior)
+
+
 def dinoprint(message, body, behavior='normal'):
     """
     Print dinosaur body and message
@@ -596,13 +622,13 @@ def parse_arguments():
     # Create a principal parser
     parser_object = ArgumentParser(prog='dinosay', description='print messages via ASCII dinosaurs',
                                    formatter_class=RawDescriptionHelpFormatter, epilog=LOGO)
-    parser_object.add_argument('--version', '-v', action='version', version='%(prog)s ' + dinosay.__version__)
+    parser_object.add_argument('--version', '-v', action='version', version='%(prog)s ' + __version__)
     parser_object.add_argument('message', help='message to print')
     input_group = parser_object.add_mutually_exclusive_group()
     input_group.add_argument('-d', '--dinosaur', help='dinosaur to print', dest='dinosaur')
     input_group.add_argument('-f', '--file', help='file containing ASCII to print', dest='file')
     input_group.add_argument('-l', '--list', help='list of all dinosaurs and parts', dest='list', action='store_true')
-    parser_object.add_argument('-c', '--color', help='color dinosaur', dest='color', action='store_true')
+    parser_object.add_argument('-c', '--color', help='color dinosaur', dest='color', action='store')
     parser_object.add_argument('-b', '--behavior', help='behavior of dinosaur', dest='behavior')
     parser_object.add_argument('-i', '--idea', help="idea's speech bubble", dest='idea', action='store_true')
     parser_object.add_argument('-t', '--tongue', help='shape of the tongue', dest='tongue', action='store_true')
@@ -611,8 +637,11 @@ def parse_arguments():
     # Return parser object
     return parser_object
 
+
 # endregion
 
 # region main
+if __name__ == '__main__':
+    dinospeak()
 
 # endregion
