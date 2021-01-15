@@ -444,7 +444,8 @@ class Dino:
         'blue': Template('\033[94m$body\033[0m'),
         'green': Template('\033[92m$body\033[0m'),
         'yellow': Template('\033[93m$body\033[0m'),
-        'red': Template('\033[91m$body\033[0m')
+        'red': Template('\033[91m$body\033[0m'),
+        'default': Template('\033[0m$body\033[0m')
     }
 
     def __init__(self, body, message=None, behavior=None, color=None):
@@ -562,7 +563,7 @@ def make_comic(text,
     """
     # Check length of first part of text
     lines = text.splitlines()
-    length_line = len(lines[0]) + 2
+    length_line = max([len(line) + 2 for line in lines])
     # Build comic
     comic = Template("""$top_sx_char$horizontal_char$top_dx_char
 $text
@@ -571,7 +572,7 @@ $bottom_sx_char$horizontal_char$bottom_dx_char""")
         top_sx_char=top_sx_char,
         top_dx_char=top_dx_char,
         horizontal_char=horizontal_char * length_line,
-        text='\n'.join(["{0} {1} {0}".format(middle_char, line.ljust(len(lines[0]))) for line in lines]),
+        text='\n'.join(["{0} {1}{0}".format(middle_char, line.ljust(length_line - 1)) for line in lines]),
         bottom_sx_char=bottom_sx_char,
         bottom_dx_char=bottom_dx_char
     )
