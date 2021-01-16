@@ -32,7 +32,7 @@ from string import Template
 # endregion
 
 # region variables
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 
 LOGO = r"""
  _____     __     __   __     ______     ______     ______     __  __   
