@@ -25,7 +25,6 @@ Module to print paleolithic comics
 """
 
 # region imports
-import dinosay
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from textwrap import wrap
 from string import Template
@@ -33,6 +32,8 @@ from string import Template
 # endregion
 
 # region variables
+__version__ = '0.2.0'
+
 LOGO = r"""
  _____     __     __   __     ______     ______     ______     __  __   
 /\  __-.  /\ \   /\ "-.\ \   /\  __ \   /\  ___\   /\  __ \   /\ \_\ \  
@@ -431,7 +432,90 @@ DINO_TYPE = {
 
 # endregion
 
+# region classes
+class Dino:
+    """
+    ASCII dinosaur class
+    """
+    COLORS = {
+        'purple': Template('\033[95m$body\033[0m'),
+        'cyan': Template('\033[96m$body\033[0m'),
+        'darkcyan': Template('\033[36m$body\033[0m'),
+        'blue': Template('\033[94m$body\033[0m'),
+        'green': Template('\033[92m$body\033[0m'),
+        'yellow': Template('\033[93m$body\033[0m'),
+        'red': Template('\033[91m$body\033[0m'),
+        'default': Template('\033[0m$body\033[0m')
+    }
+
+    def __init__(self, body, message=None, behavior=None, color=None):
+        """
+        ASCII dinosaur object
+
+        :param body: ASCII body of dinosaur
+        :param message: message to print
+        :param behavior: behavior that determines the value of $ eye, $ tongue and $ comic in the body
+        :param color: color of dinosaur. See COLORS dictionary.
+        """
+        self.body = body
+        self.message = message
+        self.behavior = behavior
+        # Save original body for resetting color
+        self.original = body
+        # Check color name
+        if color and color.lower() in self.COLORS:
+            self.color = self.COLORS.get(color.lower(), self.COLORS['default'])
+        else:
+            self.color = None
+
+    def apply_color(self):
+        """
+        Apply color to body
+
+        :return: None
+        """
+        if isinstance(self.color, str):
+            # Check color name
+            if self.color.lower() in self.COLORS:
+                self.color = self.COLORS.get(self.color.lower(), self.COLORS['default'])
+        self.body = self.color.substitute(body=self.body)
+
+    def reset_color(self):
+        """
+        Reset color body
+
+        :return: None
+        """
+        self.body = self.original
+
+
+# endregion
+
 # region functions
+def dinospeak():
+    """
+    Main function
+
+    :return: None
+    """
+    # Capture all command line arguments
+    option = parse_arguments()
+    args = option.parse_args()
+    # Wrap the message
+    message = wrap_text(args.message, args.wrap) if args.wrap else wrap_text(args.message)
+    # Build ASCII dinosaur
+    dino = Dino(DINO_TYPE.get(args.dinosaur, DINO_TYPE['tyrannosaurus']),
+                message,
+                behavior=args.behavior,
+                color=args.color
+                )
+    # Check color
+    if dino.color:
+        dino.apply_color()
+    # Print
+    dinoprint(dino.message, dino.body, dino.behavior)
+
+
 def dinoprint(message, body, behavior='normal'):
     """
     Print dinosaur body and message
@@ -479,7 +563,7 @@ def make_comic(text,
     """
     # Check length of first part of text
     lines = text.splitlines()
-    length_line = len(lines[0]) + 2
+    length_line = max([len(line) + 2 for line in lines])
     # Build comic
     comic = Template("""$top_sx_char$horizontal_char$top_dx_char
 $text
@@ -488,7 +572,7 @@ $bottom_sx_char$horizontal_char$bottom_dx_char""")
         top_sx_char=top_sx_char,
         top_dx_char=top_dx_char,
         horizontal_char=horizontal_char * length_line,
-        text='\n'.join(["{0} {1} {0}".format(middle_char, line.ljust(len(lines[0]))) for line in lines]),
+        text='\n'.join(["{0} {1}{0}".format(middle_char, line.ljust(length_line - 1)) for line in lines]),
         bottom_sx_char=bottom_sx_char,
         bottom_dx_char=bottom_dx_char
     )
@@ -539,13 +623,13 @@ def parse_arguments():
     # Create a principal parser
     parser_object = ArgumentParser(prog='dinosay', description='print messages via ASCII dinosaurs',
                                    formatter_class=RawDescriptionHelpFormatter, epilog=LOGO)
-    parser_object.add_argument('--version', '-v', action='version', version='%(prog)s ' + dinosay.__version__)
+    parser_object.add_argument('--version', '-v', action='version', version='%(prog)s ' + __version__)
     parser_object.add_argument('message', help='message to print')
     input_group = parser_object.add_mutually_exclusive_group()
     input_group.add_argument('-d', '--dinosaur', help='dinosaur to print', dest='dinosaur')
     input_group.add_argument('-f', '--file', help='file containing ASCII to print', dest='file')
     input_group.add_argument('-l', '--list', help='list of all dinosaurs and parts', dest='list', action='store_true')
-    parser_object.add_argument('-c', '--color', help='color dinosaur', dest='color', action='store_true')
+    parser_object.add_argument('-c', '--color', help='color dinosaur', dest='color', action='store')
     parser_object.add_argument('-b', '--behavior', help='behavior of dinosaur', dest='behavior')
     parser_object.add_argument('-i', '--idea', help="idea's speech bubble", dest='idea', action='store_true')
     parser_object.add_argument('-t', '--tongue', help='shape of the tongue', dest='tongue', action='store_true')
@@ -554,8 +638,11 @@ def parse_arguments():
     # Return parser object
     return parser_object
 
+
 # endregion
 
 # region main
+if __name__ == '__main__':
+    dinospeak()
 
 # endregion
