@@ -512,8 +512,30 @@ def dinospeak():
     # Check color
     if dino.color:
         dino.apply_color()
+    # Check custom element: eye, tongue, comic
+    if args.eye:
+        eye = EYE_TYPE.get(args.eye, EYE_TYPE['classic'])
+        if isinstance(dino.behavior, dict):
+            dino.behavior.update({'eye': eye})
+        else:
+            dino.behavior = {'eye': eye}
+    else:
+        dino.behavior = args.behavior
+    if args.tongue:
+        tongue = TONGUE_TYPE.get('classic')
+        dino.behavior.update({'tongue': tongue}) if isinstance(dino.behavior, dict) else {'tongue': tongue}
+    if args.idea:
+        if isinstance(dino.behavior, dict):
+            dino.behavior.update({'comic': COMIC_TYPE.get('think')})
+    # Build arguments of dinoprint
+    dinoargs = {
+        'message': dino.message,
+        'body': dino.body
+    }
+    if dino.behavior:
+        dinoargs['behavior'] = dino.behavior
     # Print
-    dinoprint(dino.message, dino.body, dino.behavior)
+    dinoprint(**dinoargs)
 
 
 def dinoprint(message, body, behavior='normal'):
@@ -525,8 +547,14 @@ def dinoprint(message, body, behavior='normal'):
     :param behavior: name of behavior
     :return:
     """
-    # Get element on behavior dictionary
-    element = behavior_selector(behavior)
+    if isinstance(behavior, str):
+        # Get element on behavior dictionary
+        element = behavior_selector(behavior)
+    elif isinstance(behavior, dict):
+        # Set element from behavior dictionary
+        element = behavior
+    else:
+        raise ValueError('behavior can be string or dictionary')
     # Create message comic
     comic_type = element.get('comic', {})
     comic = make_comic(message, **comic_type)
