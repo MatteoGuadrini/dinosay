@@ -513,20 +513,25 @@ def dinospeak():
     if dino.color:
         dino.apply_color()
     # Check custom element: eye, tongue, comic
+    bh = {}
+    # Get eye
     if args.eye:
         eye = EYE_TYPE.get(args.eye, EYE_TYPE['classic'])
-        if isinstance(dino.behavior, dict):
-            dino.behavior.update({'eye': eye})
-        else:
-            dino.behavior = {'eye': eye}
+        bh['eye'] = eye
     else:
-        dino.behavior = args.behavior
+        eye = EYE_TYPE.get('classic')
+        bh['eye'] = eye
+    # Get tongue
     if args.tongue:
         tongue = TONGUE_TYPE.get('classic')
-        dino.behavior.update({'tongue': tongue}) if isinstance(dino.behavior, dict) else {'tongue': tongue}
+        bh['tongue'] = tongue
+    # Get idea
     if args.idea:
-        if isinstance(dino.behavior, dict):
-            dino.behavior.update({'comic': COMIC_TYPE.get('think')})
+        comic = COMIC_TYPE.get('think')
+        bh['comic'] = comic
+    # Set behavior
+    if dino.behavior is None:
+        dino.behavior = bh
     # Build arguments of dinoprint
     dinoargs = {
         'message': dino.message,
