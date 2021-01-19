@@ -338,7 +338,7 @@ DINO_TYPE = {
                        _..--+~/$eye-~--.
                    _-=~      (  .   '
                 _-~     _.--=.\ \''''
-              _~      _-       \ \$tongue_\
+              _~      _-       \ \$tongue _\
              =      _=          '--'
             '      =                             .
            :      :       ____                   '=_. ___
@@ -492,6 +492,35 @@ class Dino:
 # endregion
 
 # region functions
+def dinolist():
+    """
+    List all possible variable
+
+    :return: string
+    """
+    print("""
+DINOSAY list elements and dinosaurs
+===================================
+
+DINOSAURS:              BEHAVIOR:           EYE:                COLORS: 
+- tyrannosaurus         - normal            - classic:  O O     - purple
+- dimetrodon            - happy             - borg:     = =     - cyan   
+- ankylosaur            - joking            - stoned:   * *     - darkcyan     
+- hypsilophodon         - lazy              - glass:    0-0     - blue     
+- stegosaurus           - tired             - hypno:    @ @     - green     
+- deinonychus           - nerd              - rage:     ° °     - yellow     
+- pterodactyl           - cyborg            - ko:       x x     - red     
+- archaeopteryx         - dead              - happy:    ^ ^     - default     
+- maiasaur              - trance            - closed:   - -     
+- pleisiosaur           - stoned
+- brachiosaur
+- corythosaur
+- parasaurolophus
+- triceratops
+    """)
+    exit()
+
+
 def dinospeak():
     """
     Main function
@@ -501,6 +530,9 @@ def dinospeak():
     # Capture all command line arguments
     option = parse_arguments()
     args = option.parse_args()
+    # If list...list!
+    if args.list:
+        dinolist()
     # Wrap the message
     message = wrap_text(args.message, args.wrap) if args.wrap else wrap_text(args.message)
     # Build ASCII dinosaur
@@ -657,7 +689,7 @@ def parse_arguments():
     parser_object = ArgumentParser(prog='dinosay', description='print messages via ASCII dinosaurs',
                                    formatter_class=RawDescriptionHelpFormatter, epilog=LOGO)
     parser_object.add_argument('--version', '-v', action='version', version='%(prog)s ' + __version__)
-    parser_object.add_argument('message', help='message to print')
+    parser_object.add_argument('message', nargs='?', default='Rooooaaaaarrrr', help='message to print')
     input_group = parser_object.add_mutually_exclusive_group()
     input_group.add_argument('-d', '--dinosaur', help='dinosaur to print', dest='dinosaur')
     input_group.add_argument('-f', '--file', help='file containing ASCII to print', dest='file')
