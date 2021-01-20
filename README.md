@@ -55,7 +55,7 @@ optional arguments:
 Instead, using it as a python module, we'll do it like this:
 
 ```python
-from dinosay.dinosay import dinoprint, DINO_TYPE
+from dinosay import dinoprint, DINO_TYPE
 msg = "Hi, I'm dinosay!"
 dinoprint(msg, DINO_TYPE['tyrannosaurus'])
 ```
