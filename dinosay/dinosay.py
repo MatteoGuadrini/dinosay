@@ -28,6 +28,7 @@ Module to print paleolithic comics
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from textwrap import wrap
 from string import Template
+import os
 
 # endregion
 
@@ -536,11 +537,24 @@ def dinospeak():
     # Wrap the message
     message = wrap_text(args.message, args.wrap) if args.wrap else wrap_text(args.message)
     # Build ASCII dinosaur
-    dino = Dino(DINO_TYPE.get(args.dinosaur, DINO_TYPE['tyrannosaurus']),
-                message,
-                behavior=args.behavior,
-                color=args.color
-                )
+    if args.dinosaur:
+        dino = Dino(DINO_TYPE.get(args.dinosaur, DINO_TYPE['tyrannosaurus']),
+                    message,
+                    behavior=args.behavior,
+                    color=args.color
+                    )
+    elif args.file:
+        if os.path.exists(args.file):
+            with open(args.file, encoding="ascii") as file:
+                body = ''.join(file.readlines())
+                dino = Dino(body,
+                            message,
+                            behavior=args.behavior,
+                            color=args.color
+                            )
+        else:
+            print("ERROR: {0} doesn't exists".format(args.file))
+            exit()
     # Check color
     if dino.color:
         dino.apply_color()
