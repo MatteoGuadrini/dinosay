@@ -33,6 +33,9 @@ import os
 # endregion
 
 # region variables
+__all__ = ['dinoprint', 'make_comic', 'behavior_selector', 'wrap_text', 'Dino',
+           'LOGO', 'EYE_TYPE', 'TONGUE_TYPE', 'COMIC_TYPE', 'DINO_TYPE', '__version__']
+
 __version__ = '0.2.0'
 
 LOGO = r"""

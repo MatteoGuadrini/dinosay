@@ -27,6 +27,6 @@
   \/____/   \/_/   \/_/ \/_/   \/_____/   \/_____/   \/_/\/_/   \/_____/
 """
 
-from .dinosay import __version__
+from .dinosay import *
 
 __version__ = __version__
