@@ -1,6 +1,9 @@
 import unittest
 import dinosay.dinosay as ds
+from dinosay import __version__
 from argparse import ArgumentParser
+
+print("dinosay test version {0}".format(__version__))
 
 
 class TestCommandLine(unittest.TestCase):
@@ -9,10 +12,10 @@ class TestCommandLine(unittest.TestCase):
 
     def test_dinosaur_all_option(self):
         option = ds.parse_arguments()
-        args = option.parse_args(['-d', "trex", '-c', '-b', 'crazy', '-i', '-t',
+        args = option.parse_args(['-d', "trex", '-c', 'red', '-b', 'crazy', '-i', '-t',
                                   '-e', "@ @", '-w', '40', "Rooooooaaaaarrr"])
         self.assertEqual(args.dinosaur, 'trex')
-        self.assertEqual(args.color, True)
+        self.assertEqual(args.color, 'red')
         self.assertEqual(args.behavior, 'crazy')
         self.assertEqual(args.idea, True)
         self.assertEqual(args.tongue, True)
