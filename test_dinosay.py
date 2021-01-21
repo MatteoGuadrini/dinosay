@@ -27,6 +27,11 @@ class TestCommandLine(unittest.TestCase):
         args = option.parse_args(['-l'])
         self.assertTrue(args.list)
 
+    def test_random_dinosaur(self):
+        option = ds.parse_arguments()
+        args = option.parse_args(['-r'])
+        self.assertTrue(args.random)
+
 
 class TestCore(unittest.TestCase):
     def test_wrap_text(self):
