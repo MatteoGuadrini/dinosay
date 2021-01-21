@@ -32,6 +32,12 @@ class TestCommandLine(unittest.TestCase):
         args = option.parse_args(['-r'])
         self.assertTrue(args.random)
 
+    def test_dinosaur_behavior(self):
+        option = ds.parse_arguments()
+        args = option.parse_args(['-d', 'trex', '-b', 'happy'])
+        bh = ds.behavior_selector(args.behavior)
+        self.assertIn('^ ^', bh['eye'])
+
 
 class TestCore(unittest.TestCase):
     def test_wrap_text(self):
