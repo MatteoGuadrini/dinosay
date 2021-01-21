@@ -22,6 +22,11 @@ class TestCommandLine(unittest.TestCase):
         self.assertEqual(args.eye, '@ @')
         self.assertEqual(args.wrap, 40)
 
+    def test_list(self):
+        option = ds.parse_arguments()
+        args = option.parse_args(['-l'])
+        self.assertTrue(args.list)
+
 
 class TestCore(unittest.TestCase):
     def test_wrap_text(self):
