@@ -28,6 +28,7 @@ Module to print paleolithic comics
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from textwrap import wrap
 from string import Template
+import random
 import os
 
 # endregion
@@ -540,7 +541,14 @@ def dinospeak():
     # Wrap the message
     message = wrap_text(args.message, args.wrap) if args.wrap else wrap_text(args.message)
     # Build ASCII dinosaur
-    if args.dinosaur:
+    if args.random:
+        random_dino = random.choice(list(DINO_TYPE))
+        dino = Dino(DINO_TYPE.get(random_dino),
+                    message,
+                    behavior=args.behavior,
+                    color=args.color
+                    )
+    elif args.dinosaur:
         dino = Dino(DINO_TYPE.get(args.dinosaur, DINO_TYPE['tyrannosaurus']),
                     message,
                     behavior=args.behavior,
@@ -707,8 +715,9 @@ def parse_arguments():
                                    formatter_class=RawDescriptionHelpFormatter, epilog=LOGO)
     parser_object.add_argument('--version', '-v', action='version', version='%(prog)s ' + __version__)
     parser_object.add_argument('message', nargs='?', default='Rooooaaaaarrrr', help='message to print')
-    input_group = parser_object.add_mutually_exclusive_group()
+    input_group = parser_object.add_mutually_exclusive_group(required=True)
     input_group.add_argument('-d', '--dinosaur', help='dinosaur to print', dest='dinosaur')
+    input_group.add_argument('-r', '--random', help='random dinosaur to print', dest='random', action='store_true')
     input_group.add_argument('-f', '--file', help='file containing ASCII to print', dest='file')
     input_group.add_argument('-l', '--list', help='list of all dinosaurs and parts', dest='list', action='store_true')
     parser_object.add_argument('-c', '--color', help='color dinosaur', dest='color', action='store')
