@@ -43,6 +43,10 @@ $ yast -i dinosay.rpm       # for SLES and OpenSUSE
 # for debian based and ubuntu based, see here
 $ apt-get install alien
 $ alien -i dinosay.rpm
+
+# for other
+$ git clone https://github.com/MatteoGuadrini/dinosay.git && cd dinosay
+$ python setup.py install
 ```
 
 ## Command line

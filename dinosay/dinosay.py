@@ -72,7 +72,8 @@ COMIC_TYPE = {
         'top_dx_char': '0',
         'bottom_sx_char': 'O',
         'bottom_dx_char': 'O',
-        'middle_char': 'o'
+        'middle_char': 'o',
+        'rope_char': 'o'
     },
     'think': {
         'horizontal_char': '-',
@@ -88,7 +89,8 @@ COMIC_TYPE = {
         'top_dx_char': '>',
         'bottom_sx_char': '<',
         'bottom_dx_char': '>',
-        'middle_char': '◇'
+        'middle_char': '◇',
+        'rope_char': '◇'
     },
     'star': {
         'horizontal_char': '☆',
@@ -96,7 +98,8 @@ COMIC_TYPE = {
         'top_dx_char': '☆',
         'bottom_sx_char': '☆',
         'bottom_dx_char': '☆',
-        'middle_char': '☆'
+        'middle_char': '☆',
+        'rope_char': '☆'
     },
     'hungry': {
         'horizontal_char': '-',
@@ -112,7 +115,8 @@ COMIC_TYPE = {
         'top_dx_char': '-',
         'bottom_sx_char': '*',
         'bottom_dx_char': '/',
-        'middle_char': '%'
+        'middle_char': '%',
+        'rope_char': '*'
     },
     'borg': {
         'horizontal_char': '=',
@@ -136,7 +140,8 @@ COMIC_TYPE = {
         'top_dx_char': '%',
         'bottom_sx_char': '%',
         'bottom_dx_char': '%',
-        'middle_char': '+'
+        'middle_char': '+',
+        'rope_char': '\\\\'
     },
     'love': {
         'horizontal_char': '♡',
@@ -144,7 +149,8 @@ COMIC_TYPE = {
         'top_dx_char': '♡',
         'bottom_sx_char': '♡',
         'bottom_dx_char': '♡',
-        'middle_char': '♡'
+        'middle_char': '♡',
+        'rope_char': '♡'
     },
     'scoop': {
         'horizontal_char': '*',
@@ -152,7 +158,8 @@ COMIC_TYPE = {
         'top_dx_char': '*',
         'bottom_sx_char': '*',
         'bottom_dx_char': '*',
-        'middle_char': '*'
+        'middle_char': '*',
+        'rope_char': '*'
     }
 }
 
@@ -638,7 +645,8 @@ def make_comic(text,
                top_dx_char='\\',
                bottom_sx_char='\\',
                bottom_dx_char='/',
-               middle_char='|'):
+               middle_char='|',
+               rope_char='\\'):
     """
     Function that creates the comic of the dinosaur
 
@@ -649,22 +657,29 @@ def make_comic(text,
     :param bottom_sx_char: first character at the bottom of the comic
     :param bottom_dx_char: last character at the bottom of the comic
     :param middle_char: character of the columns, between the first character at the top and bottom
+    :param rope_char: character of rope line of the comic
     :return: string
     """
     # Check length of first part of text
     lines = text.splitlines()
     length_line = max([len(line) + 2 for line in lines])
     # Build comic
-    comic = Template("""$top_sx_char$horizontal_char$top_dx_char
+    comic = Template("""
+$top_sx_char$horizontal_char$top_dx_char
 $text
-$bottom_sx_char$horizontal_char$bottom_dx_char""")
+$bottom_sx_char$horizontal_char$bottom_dx_char
+      $rope_char
+       $rope_char
+        $rope_char
+""")
     return comic.safe_substitute(
         top_sx_char=top_sx_char,
         top_dx_char=top_dx_char,
         horizontal_char=horizontal_char * length_line,
         text='\n'.join(["{0} {1}{0}".format(middle_char, line.ljust(length_line - 1)) for line in lines]),
         bottom_sx_char=bottom_sx_char,
-        bottom_dx_char=bottom_dx_char
+        bottom_dx_char=bottom_dx_char,
+        rope_char=rope_char
     )
 
 

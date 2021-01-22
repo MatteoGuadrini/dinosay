@@ -54,9 +54,11 @@ class TestCore(unittest.TestCase):
 
     def test_make_comic(self):
         comic = ds.make_comic("Hi dinosay!")
-        self.assertEqual(comic, '/-------------\\\n| Hi dinosay! |\n\\-------------/')
+        self.assertEqual(comic, '\n/-------------\\\n| Hi dinosay! |\n\\-------------/'
+                                '\n      \\\n       \\\n        \\\n')
         comic2 = ds.make_comic("Hi dinosay!", **ds.COMIC_TYPE.get('cartoon'))
-        self.assertEqual(comic2, '0ooooooooooooo0\no Hi dinosay! o\nOoooooooooooooO')
+        self.assertEqual(comic2, '\n0ooooooooooooo0\no Hi dinosay! o\nOoooooooooooooO'
+                                 '\n      o\n       o\n        o\n')
 
     def test_dino_object(self):
         trex = ds.Dino(ds.DINO_TYPE['tyrannosaurus'])
