@@ -1,9 +1,12 @@
 # dinosay
-![dinosay](img/dinosay.svg)
+<img src="https://raw.githubusercontent.com/MatteoGuadrini/dinosay/b8f1d9a89cbe6a9c24ee4d58ce95d288536f3eed/img/dinosay.svg" alt="dinosay" title="dinosay" width="300" height="300" />
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/9e5dc7af35744ddfa501192b1eb12ee8)](https://www.codacy.com/gh/MatteoGuadrini/dinosay/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MatteoGuadrini/dinosay&amp;utm_campaign=Badge_Grade)
+[![CircleCI](https://circleci.com/gh/MatteoGuadrini/dinosay.svg?style=svg)](https://circleci.com/gh/MatteoGuadrini/dinosay)
 
 _dinosay_ is a humble, simple, nice and paleolithic alternative to [_cowsay_](https://en.wikipedia.org/wiki/Cowsay).
 
-> The status of this project is: **Work in progress: _alpha_ version**
+> The status of this project is: **Work in progress: _beta_ version**
 
 ## How did the idea come about?
 
@@ -37,6 +40,8 @@ For install package, see below:
 
 ```console
 $ pip install dinosay       # for python enviroment
+# download rpm package to release page
+$ wget https://github.com/MatteoGuadrini/dinosay/archive/<release>.rpm
 $ dnf install dinosay.rpm   # for Red Hat, CentOS and fedora
 $ yast -i dinosay.rpm       # for SLES and OpenSUSE
 

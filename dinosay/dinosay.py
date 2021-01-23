@@ -20,9 +20,7 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""
-Module to print paleolithic comics
-"""
+"""Module to print paleolithic comics"""
 
 # region imports
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
@@ -37,7 +35,7 @@ import os
 __all__ = ['dinoprint', 'make_comic', 'behavior_selector', 'wrap_text', 'Dino',
            'LOGO', 'EYE_TYPE', 'TONGUE_TYPE', 'COMIC_TYPE', 'DINO_TYPE', '__version__']
 
-__version__ = '0.2.0'
+__version__ = '0.9.0'
 
 LOGO = r"""
  _____     __     __   __     ______     ______     ______     __  __   
@@ -81,7 +79,8 @@ COMIC_TYPE = {
         'top_dx_char': ')',
         'bottom_sx_char': '(',
         'bottom_dx_char': ')',
-        'middle_char': '|'
+        'middle_char': '|',
+        'rope_char': '()'
     },
     'angry': {
         'horizontal_char': '◇',
