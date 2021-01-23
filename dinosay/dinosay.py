@@ -20,19 +20,22 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""
-Module to print paleolithic comics
-"""
+"""Module to print paleolithic comics"""
 
 # region imports
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from textwrap import wrap
 from string import Template
+import random
+import os
 
 # endregion
 
 # region variables
-__version__ = '0.2.0'
+__all__ = ['dinoprint', 'make_comic', 'behavior_selector', 'wrap_text', 'Dino',
+           'LOGO', 'EYE_TYPE', 'TONGUE_TYPE', 'COMIC_TYPE', 'DINO_TYPE', '__version__']
+
+__version__ = '0.9.0'
 
 LOGO = r"""
  _____     __     __   __     ______     ______     ______     __  __   
@@ -67,7 +70,8 @@ COMIC_TYPE = {
         'top_dx_char': '0',
         'bottom_sx_char': 'O',
         'bottom_dx_char': 'O',
-        'middle_char': 'o'
+        'middle_char': 'o',
+        'rope_char': 'o'
     },
     'think': {
         'horizontal_char': '-',
@@ -75,7 +79,8 @@ COMIC_TYPE = {
         'top_dx_char': ')',
         'bottom_sx_char': '(',
         'bottom_dx_char': ')',
-        'middle_char': '|'
+        'middle_char': '|',
+        'rope_char': '()'
     },
     'angry': {
         'horizontal_char': '◇',
@@ -83,7 +88,8 @@ COMIC_TYPE = {
         'top_dx_char': '>',
         'bottom_sx_char': '<',
         'bottom_dx_char': '>',
-        'middle_char': '◇'
+        'middle_char': '◇',
+        'rope_char': '◇'
     },
     'star': {
         'horizontal_char': '☆',
@@ -91,7 +97,8 @@ COMIC_TYPE = {
         'top_dx_char': '☆',
         'bottom_sx_char': '☆',
         'bottom_dx_char': '☆',
-        'middle_char': '☆'
+        'middle_char': '☆',
+        'rope_char': '☆'
     },
     'hungry': {
         'horizontal_char': '-',
@@ -107,7 +114,8 @@ COMIC_TYPE = {
         'top_dx_char': '-',
         'bottom_sx_char': '*',
         'bottom_dx_char': '/',
-        'middle_char': '%'
+        'middle_char': '%',
+        'rope_char': '*'
     },
     'borg': {
         'horizontal_char': '=',
@@ -131,7 +139,8 @@ COMIC_TYPE = {
         'top_dx_char': '%',
         'bottom_sx_char': '%',
         'bottom_dx_char': '%',
-        'middle_char': '+'
+        'middle_char': '+',
+        'rope_char': '\\\\'
     },
     'love': {
         'horizontal_char': '♡',
@@ -139,7 +148,8 @@ COMIC_TYPE = {
         'top_dx_char': '♡',
         'bottom_sx_char': '♡',
         'bottom_dx_char': '♡',
-        'middle_char': '♡'
+        'middle_char': '♡',
+        'rope_char': '♡'
     },
     'scoop': {
         'horizontal_char': '*',
@@ -147,7 +157,8 @@ COMIC_TYPE = {
         'top_dx_char': '*',
         'bottom_sx_char': '*',
         'bottom_dx_char': '*',
-        'middle_char': '*'
+        'middle_char': '*',
+        'rope_char': '*'
     }
 }
 
@@ -338,7 +349,7 @@ DINO_TYPE = {
                        _..--+~/$eye-~--.
                    _-=~      (  .   '
                 _-~     _.--=.\ \''''
-              _~      _-       \ \$tongue_\
+              _~      _-       \ \$tongue _\
              =      _=          '--'
             '      =                             .
            :      :       ____                   '=_. ___
@@ -492,6 +503,35 @@ class Dino:
 # endregion
 
 # region functions
+def dinolist():
+    """
+    List all possible variable
+
+    :return: string
+    """
+    print("""
+DINOSAY list elements and dinosaurs
+===================================
+
+DINOSAURS:              BEHAVIOR:           EYE:                COLORS: 
+- tyrannosaurus         - normal            - classic:  O O     - purple
+- dimetrodon            - happy             - borg:     = =     - cyan   
+- ankylosaur            - joking            - stoned:   * *     - darkcyan     
+- hypsilophodon         - lazy              - glass:    0-0     - blue     
+- stegosaurus           - tired             - hypno:    @ @     - green     
+- deinonychus           - nerd              - rage:     ° °     - yellow     
+- pterodactyl           - cyborg            - ko:       x x     - red     
+- archaeopteryx         - dead              - happy:    ^ ^     - default     
+- maiasaur              - trance            - closed:   - -     
+- pleisiosaur           - stoned
+- brachiosaur
+- corythosaur
+- parasaurolophus
+- triceratops
+    """)
+    exit()
+
+
 def dinospeak():
     """
     Main function
@@ -501,19 +541,69 @@ def dinospeak():
     # Capture all command line arguments
     option = parse_arguments()
     args = option.parse_args()
+    # If list...list!
+    if args.list:
+        dinolist()
     # Wrap the message
     message = wrap_text(args.message, args.wrap) if args.wrap else wrap_text(args.message)
     # Build ASCII dinosaur
-    dino = Dino(DINO_TYPE.get(args.dinosaur, DINO_TYPE['tyrannosaurus']),
-                message,
-                behavior=args.behavior,
-                color=args.color
-                )
+    if args.random:
+        random_dino = random.choice(list(DINO_TYPE))
+        dino = Dino(DINO_TYPE.get(random_dino),
+                    message,
+                    behavior=args.behavior,
+                    color=args.color
+                    )
+    elif args.dinosaur:
+        dino = Dino(DINO_TYPE.get(args.dinosaur, DINO_TYPE['tyrannosaurus']),
+                    message,
+                    behavior=args.behavior,
+                    color=args.color
+                    )
+    elif args.file:
+        if os.path.exists(args.file):
+            with open(args.file, encoding="ascii") as file:
+                body = ''.join(file.readlines())
+                dino = Dino(body,
+                            message,
+                            behavior=args.behavior,
+                            color=args.color
+                            )
+        else:
+            print("ERROR: {0} doesn't exists".format(args.file))
+            exit()
     # Check color
     if dino.color:
         dino.apply_color()
+    # Check custom element: eye, tongue, comic
+    bh = {}
+    # Get eye
+    if args.eye:
+        eye = EYE_TYPE.get(args.eye, EYE_TYPE['classic'])
+        bh['eye'] = eye
+    else:
+        eye = EYE_TYPE.get('classic')
+        bh['eye'] = eye
+    # Get tongue
+    if args.tongue:
+        tongue = TONGUE_TYPE.get('classic')
+        bh['tongue'] = tongue
+    # Get idea
+    if args.idea:
+        comic = COMIC_TYPE.get('think')
+        bh['comic'] = comic
+    # Set behavior
+    if dino.behavior is None:
+        dino.behavior = bh
+    # Build arguments of dinoprint
+    dinoargs = {
+        'message': dino.message,
+        'body': dino.body
+    }
+    if dino.behavior:
+        dinoargs['behavior'] = dino.behavior
     # Print
-    dinoprint(dino.message, dino.body, dino.behavior)
+    dinoprint(**dinoargs)
 
 
 def dinoprint(message, body, behavior='normal'):
@@ -525,8 +615,14 @@ def dinoprint(message, body, behavior='normal'):
     :param behavior: name of behavior
     :return:
     """
-    # Get element on behavior dictionary
-    element = behavior_selector(behavior)
+    if isinstance(behavior, str):
+        # Get element on behavior dictionary
+        element = behavior_selector(behavior)
+    elif isinstance(behavior, dict):
+        # Set element from behavior dictionary
+        element = behavior
+    else:
+        raise ValueError('behavior can be string or dictionary')
     # Create message comic
     comic_type = element.get('comic', {})
     comic = make_comic(message, **comic_type)
@@ -548,7 +644,8 @@ def make_comic(text,
                top_dx_char='\\',
                bottom_sx_char='\\',
                bottom_dx_char='/',
-               middle_char='|'):
+               middle_char='|',
+               rope_char='\\'):
     """
     Function that creates the comic of the dinosaur
 
@@ -559,22 +656,29 @@ def make_comic(text,
     :param bottom_sx_char: first character at the bottom of the comic
     :param bottom_dx_char: last character at the bottom of the comic
     :param middle_char: character of the columns, between the first character at the top and bottom
+    :param rope_char: character of rope line of the comic
     :return: string
     """
     # Check length of first part of text
     lines = text.splitlines()
     length_line = max([len(line) + 2 for line in lines])
     # Build comic
-    comic = Template("""$top_sx_char$horizontal_char$top_dx_char
+    comic = Template("""
+$top_sx_char$horizontal_char$top_dx_char
 $text
-$bottom_sx_char$horizontal_char$bottom_dx_char""")
+$bottom_sx_char$horizontal_char$bottom_dx_char
+      $rope_char
+       $rope_char
+        $rope_char
+""")
     return comic.safe_substitute(
         top_sx_char=top_sx_char,
         top_dx_char=top_dx_char,
         horizontal_char=horizontal_char * length_line,
         text='\n'.join(["{0} {1}{0}".format(middle_char, line.ljust(length_line - 1)) for line in lines]),
         bottom_sx_char=bottom_sx_char,
-        bottom_dx_char=bottom_dx_char
+        bottom_dx_char=bottom_dx_char,
+        rope_char=rope_char
     )
 
 
@@ -624,9 +728,10 @@ def parse_arguments():
     parser_object = ArgumentParser(prog='dinosay', description='print messages via ASCII dinosaurs',
                                    formatter_class=RawDescriptionHelpFormatter, epilog=LOGO)
     parser_object.add_argument('--version', '-v', action='version', version='%(prog)s ' + __version__)
-    parser_object.add_argument('message', help='message to print')
-    input_group = parser_object.add_mutually_exclusive_group()
+    parser_object.add_argument('message', nargs='?', default='Rooooaaaaarrrr', help='message to print')
+    input_group = parser_object.add_mutually_exclusive_group(required=True)
     input_group.add_argument('-d', '--dinosaur', help='dinosaur to print', dest='dinosaur')
+    input_group.add_argument('-r', '--random', help='random dinosaur to print', dest='random', action='store_true')
     input_group.add_argument('-f', '--file', help='file containing ASCII to print', dest='file')
     input_group.add_argument('-l', '--list', help='list of all dinosaurs and parts', dest='list', action='store_true')
     parser_object.add_argument('-c', '--color', help='color dinosaur', dest='color', action='store')

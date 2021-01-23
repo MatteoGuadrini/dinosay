@@ -1,6 +1,9 @@
 import unittest
 import dinosay.dinosay as ds
+from dinosay import __version__
 from argparse import ArgumentParser
+
+print("dinosay test version {0}".format(__version__))
 
 
 class TestCommandLine(unittest.TestCase):
@@ -9,15 +12,31 @@ class TestCommandLine(unittest.TestCase):
 
     def test_dinosaur_all_option(self):
         option = ds.parse_arguments()
-        args = option.parse_args(['-d', "trex", '-c', '-b', 'crazy', '-i', '-t',
+        args = option.parse_args(['-d', "trex", '-c', 'red', '-b', 'crazy', '-i', '-t',
                                   '-e', "@ @", '-w', '40', "Rooooooaaaaarrr"])
         self.assertEqual(args.dinosaur, 'trex')
-        self.assertEqual(args.color, True)
+        self.assertEqual(args.color, 'red')
         self.assertEqual(args.behavior, 'crazy')
         self.assertEqual(args.idea, True)
         self.assertEqual(args.tongue, True)
         self.assertEqual(args.eye, '@ @')
         self.assertEqual(args.wrap, 40)
+
+    def test_list(self):
+        option = ds.parse_arguments()
+        args = option.parse_args(['-l'])
+        self.assertTrue(args.list)
+
+    def test_random_dinosaur(self):
+        option = ds.parse_arguments()
+        args = option.parse_args(['-r'])
+        self.assertTrue(args.random)
+
+    def test_dinosaur_behavior(self):
+        option = ds.parse_arguments()
+        args = option.parse_args(['-d', 'trex', '-b', 'happy'])
+        bh = ds.behavior_selector(args.behavior)
+        self.assertIn('^ ^', bh['eye'])
 
 
 class TestCore(unittest.TestCase):
@@ -35,9 +54,11 @@ class TestCore(unittest.TestCase):
 
     def test_make_comic(self):
         comic = ds.make_comic("Hi dinosay!")
-        self.assertEqual(comic, '/-------------\\\n| Hi dinosay! |\n\\-------------/')
+        self.assertEqual(comic, '\n/-------------\\\n| Hi dinosay! |\n\\-------------/'
+                                '\n      \\\n       \\\n        \\\n')
         comic2 = ds.make_comic("Hi dinosay!", **ds.COMIC_TYPE.get('cartoon'))
-        self.assertEqual(comic2, '0ooooooooooooo0\no Hi dinosay! o\nOoooooooooooooO')
+        self.assertEqual(comic2, '\n0ooooooooooooo0\no Hi dinosay! o\nOoooooooooooooO'
+                                 '\n      o\n       o\n        o\n')
 
     def test_dino_object(self):
         trex = ds.Dino(ds.DINO_TYPE['tyrannosaurus'])
