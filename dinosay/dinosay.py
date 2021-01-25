@@ -163,7 +163,8 @@ COMIC_TYPE = {
 }
 
 DINO_TYPE = {
-    'tyrannosaurus': r"""$comic
+    'tyrannosaurus': r"""
+                                  $comic
                                                  ____
      ___                                      .-~    '.
     `-._~-.                                  / /  ~$eye\   )
@@ -186,7 +187,8 @@ DINO_TYPE = {
                            )  \
                      /,`--'~\--'~\
     """,
-    'dimetrodon': r"""$comic
+    'dimetrodon': r"""
+    $comic
                                 _._
                               _/:|:
                              /||||||.
@@ -210,7 +212,8 @@ DINO_TYPE = {
                              /  //
                             <_oo_>
     """,
-    'ankylosaur': r"""$comic
+    'ankylosaur': r"""
+                                     $comic
     
                             /~~~~~~~~~~~~\_
        _+=+_             _[~  /~~~~~~~~~~~~\_     
@@ -225,7 +228,8 @@ DINO_TYPE = {
                                     \\  \          \\  \
                                     <'_V_'>        <'_V_'>
     """,
-    'hypsilophodon': r"""$comic
+    'hypsilophodon': r"""
+                                              $comic
                                   ___......__             _ 
                               _.-'           ~-_       _.=$eye~~-_
       --=====-.-.-_----------~   .--.       _   -.__.-~ ( ___==>
@@ -240,7 +244,6 @@ DINO_TYPE = {
                                          ~~'
     """,
     'stegosaurus': r"""$comic
-    
                             .       .
                            / `.   .' \
                    .---.  <    > <    >  .---.
@@ -258,7 +261,8 @@ DINO_TYPE = {
                   |  | {   }         \   \_\
                  '---.o___,'       .o___,'
     """,
-    'deinonychus': r"""$comic
+    'deinonychus': r"""
+                                             $comic
     
                                                         .--.__
                                                       .~ ($eye)  ~~~---_
@@ -284,7 +288,8 @@ DINO_TYPE = {
                      / /  _ _
                     (_.-.'O'-'.
     """,
-    'pterodactyl': r"""$comic
+    'pterodactyl': r"""
+                       $comic
     
                                  <\              _
                                   \\          _/{
@@ -304,7 +309,8 @@ DINO_TYPE = {
                                 \\      WWW
                                 '
     """,
-    'archaeopteryx': r"""$comic
+    'archaeopteryx': r"""
+               $comic
     
                             _
                         __~$eye~_
@@ -343,7 +349,8 @@ DINO_TYPE = {
                           (((|      -----     __|_|__
                            '''                 -----
     """,
-    'pleisiosaur': r"""$comic
+    'pleisiosaur': r"""
+                       $comic
     
     
                        _..--+~/$eye-~--.
@@ -382,7 +389,8 @@ DINO_TYPE = {
                       |   |/             _\   \         ~-.__________.-~~~~~~~~~'''
                     .o'___/            .o______}
     """,
-    'corythosaur': r"""$comic
+    'corythosaur': r"""
+                                 $comic
     
                                              .--.
                                             {(~~)}
