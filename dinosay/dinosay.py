@@ -20,7 +20,7 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Module to print paleolithic comics"""
+"""Module to print paleolithic comics."""
 
 # region imports
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
@@ -445,9 +445,7 @@ DINO_TYPE = {
 
 # region classes
 class Dino:
-    """
-    ASCII dinosaur class
-    """
+    """ASCII dinosaur class"""
     COLORS = {
         'purple': Template('\033[95m$body\033[0m'),
         'cyan': Template('\033[96m$body\033[0m'),
