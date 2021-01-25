@@ -24,7 +24,7 @@
 
 # region imports
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
-from textwrap import wrap
+from textwrap import wrap, indent
 from string import Template
 import random
 import os
@@ -623,7 +623,10 @@ def dinoprint(message, body, behavior='normal'):
         raise ValueError('behavior can be string or dictionary')
     # Create message comic
     comic_type = element.get('comic', {})
-    comic = make_comic(message, **comic_type)
+    # Indent comic
+    comic_word = [line for line in body.split('\n') if '$comic' in line]
+    spaces = len(comic_word[0]) - len(comic_word[0].lstrip()) if comic_word else 0
+    comic = indent(make_comic(message, **comic_type), ' ' * spaces)
     # Print dinosaur
     eyes = element.get('eye')
     tongue = element.get('tongue')

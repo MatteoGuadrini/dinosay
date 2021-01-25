@@ -40,18 +40,18 @@ For install package, see below:
 
 ```console
 $ pip install dinosay       # for python enviroment
-# download rpm package to release page
+
 $ wget https://github.com/MatteoGuadrini/dinosay/archive/<release>.rpm
 $ dnf install dinosay.rpm   # for Red Hat, CentOS and fedora
 $ yast -i dinosay.rpm       # for SLES and OpenSUSE
 
-# for debian based and ubuntu based, see here
-$ apt-get install alien
+
+$ apt-get install alien     # for debian based and ubuntu based, see here
 $ alien -i dinosay.rpm
 
-# for other
+
 $ git clone https://github.com/MatteoGuadrini/dinosay.git && cd dinosay
-$ python setup.py install
+$ python setup.py install   # for other
 ```
 
 ## Command line
@@ -125,7 +125,7 @@ This is a simple template:
 ```console
 $ cat <<EOF >> /tmp/trex.ascii
 
-$comic
+                             $comic
                                         O_
                                        /  >
                                       -  >   ^\
