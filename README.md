@@ -91,6 +91,27 @@ optional arguments:
 \ \ \/\ \ \ \ \  \ \ \-.  \  \ \ \/\ \  \ \___  \  \ \  __ \  \ \____ \ 
  \ \____-  \ \_\  \ \_\\"\_\  \ \_____\  \/\_____\  \ \_\ \_\  \/\_____\
   \/____/   \/_/   \/_/ \/_/   \/_____/   \/_____/   \/_/\/_/   \/_____/ 
+  
+$ dinolist
+
+DINOSAY list elements and dinosaurs
+===================================
+
+DINOSAURS:              BEHAVIOR:           EYE:                COLORS: 
+- tyrannosaurus         - normal            - classic:  O O     - purple
+- dimetrodon            - happy             - borg:     = =     - cyan   
+- ankylosaur            - joking            - stoned:   * *     - darkcyan     
+- hypsilophodon         - lazy              - glass:    0-0     - blue     
+- stegosaurus           - tired             - hypno:    @ @     - green     
+- deinonychus           - nerd              - rage:     ° °     - yellow     
+- pterodactyl           - cyborg            - ko:       x x     - red     
+- archaeopteryx         - dead              - happy:    ^ ^     - default     
+- maiasaur              - trance            - closed:   - -     
+- pleisiosaur           - stoned
+- brachiosaur
+- corythosaur
+- parasaurolophus
+- triceratops
 ```
 
 ## Python module
