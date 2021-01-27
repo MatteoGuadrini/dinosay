@@ -35,7 +35,7 @@ import os
 __all__ = ['dinoprint', 'make_comic', 'behavior_selector', 'wrap_text', 'Dino',
            'LOGO', 'EYE_TYPE', 'TONGUE_TYPE', 'COMIC_TYPE', 'DINO_TYPE', 'DINO_ALIAS', '__version__']
 
-__version__ = '0.9.0'
+__version__ = '1.0.0'
 
 LOGO = r"""
  _____     __     __   __     ______     ______     ______     __  __   
