@@ -97,21 +97,22 @@ $ dinolist
 DINOSAY list elements and dinosaurs
 ===================================
 
-DINOSAURS:              BEHAVIOR:           EYE:                COLORS: 
-- tyrannosaurus         - normal            - classic:  O O     - purple
-- dimetrodon            - happy             - borg:     = =     - cyan   
-- ankylosaur            - joking            - stoned:   * *     - darkcyan     
-- hypsilophodon         - lazy              - glass:    0-0     - blue     
-- stegosaurus           - tired             - hypno:    @ @     - green     
-- deinonychus           - nerd              - rage:     ° °     - yellow     
-- pterodactyl           - cyborg            - ko:       x x     - red     
-- archaeopteryx         - dead              - happy:    ^ ^     - default     
-- maiasaur              - trance            - closed:   - -     
-- pleisiosaur           - stoned
-- brachiosaur
-- corythosaur
-- parasaurolophus
-- triceratops
+DINOSAURS - ALIAS:          BEHAVIOR:      EYE:                 COLORS: 
+- tyrannosaurus - trex      - normal       - classic:  O O      - purple
+- dimetrodon - dim          - happy        - borg:     = =      - cyan   
+- ankylosaur - anky         - joking       - stoned:   * *      - darkcyan     
+- hypsilophodon - hypsi     - lazy         - glass:    0-0      - blue     
+- stegosaurus - stego       - tired        - hypno:    @ @      - green     
+- deinonychus - deino       - nerd         - rage:     ° °      - yellow     
+- pterodactyl - ptero       - cyborg       - ko:       x x      - red     
+- archaeopteryx - archa     - dead         - happy:    ^ ^      - default     
+- maiasaur - maia           - trance       - closed:   - -     
+- pleisiosaur - plei        - stoned
+- brachiosaur - brachio
+- corythosaur - cory
+- parasaurolophus - para
+- triceratops - trice
+
 ```
 
 ## Python module
