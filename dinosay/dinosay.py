@@ -33,7 +33,7 @@ import os
 
 # region variables
 __all__ = ['dinoprint', 'make_comic', 'behavior_selector', 'wrap_text', 'Dino',
-           'LOGO', 'EYE_TYPE', 'TONGUE_TYPE', 'COMIC_TYPE', 'DINO_TYPE', '__version__']
+           'LOGO', 'EYE_TYPE', 'TONGUE_TYPE', 'COMIC_TYPE', 'DINO_TYPE', 'DINO_ALIAS', '__version__']
 
 __version__ = '0.9.0'
 
@@ -448,6 +448,23 @@ DINO_TYPE = {
     """
 }
 
+DINO_ALIAS = {
+    'trex': DINO_TYPE['tyrannosaurus'],
+    'dim': DINO_TYPE['dimetrodon'],
+    'anky': DINO_TYPE['ankylosaur'],
+    'hypsi': DINO_TYPE['hypsilophodon'],
+    'stego': DINO_TYPE['stegosaurus'],
+    'deino': DINO_TYPE['deinonychus'],
+    'ptero': DINO_TYPE['pterodactyl'],
+    'archa': DINO_TYPE['archaeopteryx'],
+    'maia': DINO_TYPE['maiasaur'],
+    'plei': DINO_TYPE['pleisiosaur'],
+    'brachio': DINO_TYPE['brachiosaur'],
+    'cory': DINO_TYPE['corythosaur'],
+    'para': DINO_TYPE['parasaurolophus'],
+    'trice': DINO_TYPE['triceratops']
+}
+
 
 # endregion
 
@@ -519,21 +536,21 @@ def dinolist():
 DINOSAY list elements and dinosaurs
 ===================================
 
-DINOSAURS:              BEHAVIOR:           EYE:                COLORS: 
-- tyrannosaurus         - normal            - classic:  O O     - purple
-- dimetrodon            - happy             - borg:     = =     - cyan   
-- ankylosaur            - joking            - stoned:   * *     - darkcyan     
-- hypsilophodon         - lazy              - glass:    0-0     - blue     
-- stegosaurus           - tired             - hypno:    @ @     - green     
-- deinonychus           - nerd              - rage:     ° °     - yellow     
-- pterodactyl           - cyborg            - ko:       x x     - red     
-- archaeopteryx         - dead              - happy:    ^ ^     - default     
-- maiasaur              - trance            - closed:   - -     
-- pleisiosaur           - stoned
-- brachiosaur
-- corythosaur
-- parasaurolophus
-- triceratops
+DINOSAURS - ALIAS:          BEHAVIOR:      EYE:                 COLORS: 
+- tyrannosaurus - trex      - normal       - classic:  O O      - purple
+- dimetrodon - dim          - happy        - borg:     = =      - cyan   
+- ankylosaur - anky         - joking       - stoned:   * *      - darkcyan     
+- hypsilophodon - hypsi     - lazy         - glass:    0-0      - blue     
+- stegosaurus - stego       - tired        - hypno:    @ @      - green     
+- deinonychus - deino       - nerd         - rage:     ° °      - yellow     
+- pterodactyl - ptero       - cyborg       - ko:       x x      - red     
+- archaeopteryx - archa     - dead         - happy:    ^ ^      - default     
+- maiasaur - maia           - trance       - closed:   - -     
+- pleisiosaur - plei        - stoned
+- brachiosaur - brachio
+- corythosaur - cory
+- parasaurolophus - para
+- triceratops - trice
     """)
     exit()
 
@@ -561,7 +578,7 @@ def dinospeak():
                     color=args.color
                     )
     elif args.dinosaur:
-        dino = Dino(DINO_TYPE.get(args.dinosaur, DINO_TYPE['tyrannosaurus']),
+        dino = Dino(DINO_TYPE.get(args.dinosaur, DINO_ALIAS.get(args.dinosaur, DINO_TYPE['tyrannosaurus'])),
                     message,
                     behavior=args.behavior,
                     color=args.color
