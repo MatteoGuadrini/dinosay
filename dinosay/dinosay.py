@@ -20,11 +20,11 @@
 #     You should have received a copy of the GNU General Public License
 #     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Module to print paleolithic comics"""
+"""Module to print paleolithic comics."""
 
 # region imports
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
-from textwrap import wrap
+from textwrap import wrap, indent
 from string import Template
 import random
 import os
@@ -33,9 +33,9 @@ import os
 
 # region variables
 __all__ = ['dinoprint', 'make_comic', 'behavior_selector', 'wrap_text', 'Dino',
-           'LOGO', 'EYE_TYPE', 'TONGUE_TYPE', 'COMIC_TYPE', 'DINO_TYPE', '__version__']
+           'LOGO', 'EYE_TYPE', 'TONGUE_TYPE', 'COMIC_TYPE', 'DINO_TYPE', 'DINO_ALIAS', '__version__']
 
-__version__ = '0.9.0'
+__version__ = '1.0.0'
 
 LOGO = r"""
  _____     __     __   __     ______     ______     ______     __  __   
@@ -163,7 +163,8 @@ COMIC_TYPE = {
 }
 
 DINO_TYPE = {
-    'tyrannosaurus': r"""$comic
+    'tyrannosaurus': r"""
+                                  $comic
                                                  ____
      ___                                      .-~    '.
     `-._~-.                                  / /  ~$eye\   )
@@ -186,7 +187,8 @@ DINO_TYPE = {
                            )  \
                      /,`--'~\--'~\
     """,
-    'dimetrodon': r"""$comic
+    'dimetrodon': r"""
+    $comic
                                 _._
                               _/:|:
                              /||||||.
@@ -210,7 +212,8 @@ DINO_TYPE = {
                              /  //
                             <_oo_>
     """,
-    'ankylosaur': r"""$comic
+    'ankylosaur': r"""
+                                     $comic
     
                             /~~~~~~~~~~~~\_
        _+=+_             _[~  /~~~~~~~~~~~~\_     
@@ -225,7 +228,8 @@ DINO_TYPE = {
                                     \\  \          \\  \
                                     <'_V_'>        <'_V_'>
     """,
-    'hypsilophodon': r"""$comic
+    'hypsilophodon': r"""
+                                              $comic
                                   ___......__             _ 
                               _.-'           ~-_       _.=$eye~~-_
       --=====-.-.-_----------~   .--.       _   -.__.-~ ( ___==>
@@ -240,7 +244,6 @@ DINO_TYPE = {
                                          ~~'
     """,
     'stegosaurus': r"""$comic
-    
                             .       .
                            / `.   .' \
                    .---.  <    > <    >  .---.
@@ -258,7 +261,8 @@ DINO_TYPE = {
                   |  | {   }         \   \_\
                  '---.o___,'       .o___,'
     """,
-    'deinonychus': r"""$comic
+    'deinonychus': r"""
+                                             $comic
     
                                                         .--.__
                                                       .~ ($eye)  ~~~---_
@@ -284,7 +288,8 @@ DINO_TYPE = {
                      / /  _ _
                     (_.-.'O'-'.
     """,
-    'pterodactyl': r"""$comic
+    'pterodactyl': r"""
+                       $comic
     
                                  <\              _
                                   \\          _/{
@@ -304,7 +309,8 @@ DINO_TYPE = {
                                 \\      WWW
                                 '
     """,
-    'archaeopteryx': r"""$comic
+    'archaeopteryx': r"""
+               $comic
     
                             _
                         __~$eye~_
@@ -343,7 +349,8 @@ DINO_TYPE = {
                           (((|      -----     __|_|__
                            '''                 -----
     """,
-    'pleisiosaur': r"""$comic
+    'pleisiosaur': r"""
+                       $comic
     
     
                        _..--+~/$eye-~--.
@@ -382,7 +389,8 @@ DINO_TYPE = {
                       |   |/             _\   \         ~-.__________.-~~~~~~~~~'''
                     .o'___/            .o______}
     """,
-    'corythosaur': r"""$comic
+    'corythosaur': r"""
+                                 $comic
     
                                              .--.
                                             {(~~)}
@@ -440,14 +448,29 @@ DINO_TYPE = {
     """
 }
 
+DINO_ALIAS = {
+    'trex': DINO_TYPE['tyrannosaurus'],
+    'dim': DINO_TYPE['dimetrodon'],
+    'anky': DINO_TYPE['ankylosaur'],
+    'hypsi': DINO_TYPE['hypsilophodon'],
+    'stego': DINO_TYPE['stegosaurus'],
+    'deino': DINO_TYPE['deinonychus'],
+    'ptero': DINO_TYPE['pterodactyl'],
+    'archa': DINO_TYPE['archaeopteryx'],
+    'maia': DINO_TYPE['maiasaur'],
+    'plei': DINO_TYPE['pleisiosaur'],
+    'brachio': DINO_TYPE['brachiosaur'],
+    'cory': DINO_TYPE['corythosaur'],
+    'para': DINO_TYPE['parasaurolophus'],
+    'trice': DINO_TYPE['triceratops']
+}
+
 
 # endregion
 
 # region classes
 class Dino:
-    """
-    ASCII dinosaur class
-    """
+    """ASCII dinosaur class"""
     COLORS = {
         'purple': Template('\033[95m$body\033[0m'),
         'cyan': Template('\033[96m$body\033[0m'),
@@ -513,21 +536,21 @@ def dinolist():
 DINOSAY list elements and dinosaurs
 ===================================
 
-DINOSAURS:              BEHAVIOR:           EYE:                COLORS: 
-- tyrannosaurus         - normal            - classic:  O O     - purple
-- dimetrodon            - happy             - borg:     = =     - cyan   
-- ankylosaur            - joking            - stoned:   * *     - darkcyan     
-- hypsilophodon         - lazy              - glass:    0-0     - blue     
-- stegosaurus           - tired             - hypno:    @ @     - green     
-- deinonychus           - nerd              - rage:     ° °     - yellow     
-- pterodactyl           - cyborg            - ko:       x x     - red     
-- archaeopteryx         - dead              - happy:    ^ ^     - default     
-- maiasaur              - trance            - closed:   - -     
-- pleisiosaur           - stoned
-- brachiosaur
-- corythosaur
-- parasaurolophus
-- triceratops
+DINOSAURS - ALIAS:          BEHAVIOR:      EYE:                 COLORS: 
+- tyrannosaurus - trex      - normal       - classic:  O O      - purple
+- dimetrodon - dim          - happy        - borg:     = =      - cyan   
+- ankylosaur - anky         - joking       - stoned:   * *      - darkcyan     
+- hypsilophodon - hypsi     - lazy         - glass:    0-0      - blue     
+- stegosaurus - stego       - tired        - hypno:    @ @      - green     
+- deinonychus - deino       - nerd         - rage:     ° °      - yellow     
+- pterodactyl - ptero       - cyborg       - ko:       x x      - red     
+- archaeopteryx - archa     - dead         - happy:    ^ ^      - default     
+- maiasaur - maia           - trance       - closed:   - -     
+- pleisiosaur - plei        - stoned
+- brachiosaur - brachio
+- corythosaur - cory
+- parasaurolophus - para
+- triceratops - trice
     """)
     exit()
 
@@ -555,7 +578,7 @@ def dinospeak():
                     color=args.color
                     )
     elif args.dinosaur:
-        dino = Dino(DINO_TYPE.get(args.dinosaur, DINO_TYPE['tyrannosaurus']),
+        dino = Dino(DINO_TYPE.get(args.dinosaur, DINO_ALIAS.get(args.dinosaur, DINO_TYPE['tyrannosaurus'])),
                     message,
                     behavior=args.behavior,
                     color=args.color
@@ -625,7 +648,10 @@ def dinoprint(message, body, behavior='normal'):
         raise ValueError('behavior can be string or dictionary')
     # Create message comic
     comic_type = element.get('comic', {})
-    comic = make_comic(message, **comic_type)
+    # Indent comic
+    comic_word = [line for line in body.split('\n') if '$comic' in line]
+    spaces = len(comic_word[0]) - len(comic_word[0].lstrip()) if comic_word else 0
+    comic = indent(make_comic(message, **comic_type), ' ' * spaces)
     # Print dinosaur
     eyes = element.get('eye')
     tongue = element.get('tongue')
