@@ -6,8 +6,6 @@
 
 _dinosay_ is a humble, simple, nice and paleolithic alternative to [_cowsay_](https://en.wikipedia.org/wiki/Cowsay).
 
-> The status of this project is: **Work in progress: _beta_ version**
-
 ## How did the idea come about?
 
 The idea came from my two children. 
@@ -41,7 +39,7 @@ For install package, see below:
 ```console
 $ pip install dinosay       # for python enviroment
 
-$ wget https://github.com/MatteoGuadrini/dinosay/archive/<release>.rpm
+$ wget https://github.com/MatteoGuadrini/dinosay/releases/download/1.0.0/dinosay-<version>>-1.noarch.rpm -O dinosay.rpm
 $ dnf install dinosay.rpm   # for Red Hat, CentOS and fedora
 $ yast -i dinosay.rpm       # for SLES and OpenSUSE
 
