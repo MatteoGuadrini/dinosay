@@ -39,8 +39,8 @@ For install package, see below:
 ```console
 $ pip install dinosay       # for python enviroment
 
-$ wget https://github.com/MatteoGuadrini/dinosay/releases/download/1.0.0/dinosay-<version>>-1.noarch.rpm -O dinosay.rpm
-$ dnf install dinosay.rpm   # for Red Hat, CentOS and fedora
+$ dnf copr enable matteoguadrini/dinosay && dnf install dinosay -y # for Red Hat, CentOS, Mageia and fedora
+$ wget https://github.com/MatteoGuadrini/dinosay/releases/download/<version>/dinosay-<version>-1.noarch.rpm -O dinosay.rpm
 $ yast -i dinosay.rpm       # for SLES and OpenSUSE
 
 
