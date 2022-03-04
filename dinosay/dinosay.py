@@ -32,10 +32,10 @@ import os
 # endregion
 
 # region variables
-__all__ = ['dinoprint', 'make_comic', 'behavior_selector', 'wrap_text', 'Dino',
+__all__ = ['dinoprint', 'dinostring', 'make_comic', 'behavior_selector', 'wrap_text', 'Dino',
            'LOGO', 'EYE_TYPE', 'TONGUE_TYPE', 'COMIC_TYPE', 'DINO_TYPE', 'DINO_ALIAS', '__version__']
 
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 
 LOGO = r"""
  _____     __     __   __     ______     ______     ______     __  __   
@@ -634,9 +634,21 @@ def dinoprint(message, body, behavior='normal'):
     Print dinosaur body and message
 
     :param message: text message
-    :param body: dinoaur body
+    :param body: dinosaur body
     :param behavior: name of behavior
     :return:
+    """
+    print(dinostring(message, body, behavior))
+
+
+def dinostring(message, body, behavior):
+    """
+    Creates dinosaur body and message
+
+    :param message: text message
+    :param body: dinosaur body
+    :param behavior: name of behavior
+    :return: dinocomic string
     """
     if isinstance(behavior, str):
         # Get element on behavior dictionary
@@ -656,12 +668,12 @@ def dinoprint(message, body, behavior='normal'):
     eyes = element.get('eye')
     tongue = element.get('tongue')
     dinosaur = Template(body)
-    print(dinosaur.safe_substitute(
+    return dinosaur.safe_substitute(
         eye=eyes[0],
         eyes=eyes,
         tongue=tongue if tongue else '',
         comic=comic
-    ))
+    )
 
 
 def make_comic(text,
