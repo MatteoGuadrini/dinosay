@@ -124,6 +124,14 @@ msg = "Hi, I'm dinosay!"
 dinoprint(msg, DINO_TYPE['tyrannosaurus'])
 ```
 
+Or like this:
+
+```python
+from dinosay import dinostring, DINO_ALIAS
+msg = "Hi, I'm dinosay!"
+return dinostring(message, DINO_ALIAS['brachio'], 'happy')
+```
+
 ## Custom template
 
 If you want to build a custom template to parse to cowsay's _file_ parameter, then you should follow these guidelines.
