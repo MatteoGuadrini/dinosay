@@ -1,5 +1,10 @@
 # Release notes
 
+## 1.1.0
+XXX XX, 2022
+
+- Add dinostring function without printing
+
 ## 1.0.0
 Jan 27, 2021
 
