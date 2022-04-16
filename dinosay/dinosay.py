@@ -594,7 +594,7 @@ def dinospeak():
                             )
         else:
             print("ERROR: {0} doesn't exists".format(args.file))
-            exit()
+            exit(1)
     # Check color
     if dino.color:
         dino.apply_color()
