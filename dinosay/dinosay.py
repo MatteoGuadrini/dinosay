@@ -23,7 +23,7 @@
 """Module to print paleolithic comics."""
 
 # region imports
-from argparse import ArgumentParser, RawDescriptionHelpFormatter
+from argparse import ArgumentParser, RawDescriptionHelpFormatter, FileType
 from textwrap import wrap, indent
 from string import Template
 import random
@@ -584,17 +584,12 @@ def dinospeak():
                     color=args.color
                     )
     elif args.file:
-        if os.path.exists(args.file):
-            with open(args.file, encoding="ascii") as file:
-                body = ''.join(file.readlines())
-                dino = Dino(body,
-                            message,
-                            behavior=args.behavior,
-                            color=args.color
-                            )
-        else:
-            print("ERROR: {0} doesn't exists".format(args.file))
-            exit(1)
+        with args.file as file:
+            dino = Dino(file.read(),
+                        message,
+                        behavior=args.behavior,
+                        color=args.color
+                        )
     # Check color
     if dino.color:
         dino.apply_color()
@@ -770,7 +765,8 @@ def parse_arguments():
     input_group = parser_object.add_mutually_exclusive_group(required=True)
     input_group.add_argument('-d', '--dinosaur', help='dinosaur to print', dest='dinosaur')
     input_group.add_argument('-r', '--random', help='random dinosaur to print', dest='random', action='store_true')
-    input_group.add_argument('-f', '--file', help='file containing ASCII to print', dest='file')
+    input_group.add_argument('-f', '--file', help='file containing ASCII to print', dest='file',
+                             type=FileType('rt', encoding="ascii"))
     input_group.add_argument('-l', '--list', help='list of all dinosaurs and parts', dest='list', action='store_true')
     parser_object.add_argument('-c', '--color', help='color dinosaur', dest='color', action='store')
     parser_object.add_argument('-b', '--behavior', help='behavior of dinosaur', dest='behavior')
