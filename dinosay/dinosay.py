@@ -27,7 +27,6 @@ from argparse import ArgumentParser, RawDescriptionHelpFormatter, FileType
 from textwrap import wrap, indent
 from string import Template
 import random
-import os
 
 # endregion
 
@@ -578,7 +577,8 @@ def dinospeak():
                     color=args.color
                     )
     elif args.dinosaur:
-        dino = Dino(DINO_TYPE.get(args.dinosaur, DINO_ALIAS.get(args.dinosaur, DINO_TYPE['tyrannosaurus'])),
+        dinosaur = args.dinosaur.lower()
+        dino = Dino(DINO_TYPE.get(dinosaur, DINO_ALIAS.get(dinosaur, DINO_TYPE['tyrannosaurus'])),
                     message,
                     behavior=args.behavior,
                     color=args.color
