@@ -1,9 +1,15 @@
 # Release notes
 
+## 1.2.0
+Apr 19, 2022
+
+- Add _FileType_ for file option
+- Fix lowercase dinosaur name
+
 ## 1.1.0
 Mar 12, 2022
 
-- Add dinostring function without printing
+- Add _dinostring_ function without printing
 
 ## 1.0.0
 Jan 27, 2021

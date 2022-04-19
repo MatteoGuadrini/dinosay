@@ -34,7 +34,7 @@ import random
 __all__ = ['dinoprint', 'dinostring', 'make_comic', 'behavior_selector', 'wrap_text', 'Dino',
            'LOGO', 'EYE_TYPE', 'TONGUE_TYPE', 'COMIC_TYPE', 'DINO_TYPE', 'DINO_ALIAS', '__version__']
 
-__version__ = '1.1.0'
+__version__ = '1.2.0'
 
 LOGO = r"""
  _____     __     __   __     ______     ______     ______     __  __   
