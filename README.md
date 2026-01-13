@@ -129,7 +129,7 @@ Or like this:
 ```python
 from dinosay import dinostring, DINO_ALIAS
 msg = "Hi, I'm dinosay!"
-return dinostring(message, DINO_ALIAS['brachio'], 'happy')
+return dinostring(msg, DINO_ALIAS['brachio'], 'happy')
 ```
 
 ## Custom template
